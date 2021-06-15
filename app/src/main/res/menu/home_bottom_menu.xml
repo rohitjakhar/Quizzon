@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_baseline_home"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/nav_search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_baseline_search"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/placeHolder"
+        android:title=""
+        />
+    <item
+        android:id="@+id/nav_profile"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_baseline_person"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/nav_about"
+        android:title="@string/about"
+        android:icon="@drawable/ic_baseline_info"
+        app:showAsAction="always"
+        />
+</menu>

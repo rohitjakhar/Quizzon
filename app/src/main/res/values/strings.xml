@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Quizzon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_your_password">Enter Your Password</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="login">Login</string>
+    <string name="if_you_don_t_have_account_register_here">If you don\'t have account, Register Here</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="about">About</string>
+    <string name="add_question">Add Question</string>
+    <string name="enter_quiz_tile">Enter Quiz Tile</string>
+    <string name="write_question">Write Question</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="option1">Option 1</string>
+    <string name="option2">Option 2</string>
+    <string name="option3">Option 3</string>
+    <string name="option4">Option 4</string>
+    <string name="save">Save</string>
+    <string name="choose_category">Choose Category</string>
+    <string name="correct_option">Correct Option</string>
+
+
+</resources>
