@@ -32,6 +32,12 @@ interface QuizService {
     ): Response<TokenResponse>
 
     @POST("/")
+    suspend fun refreshOperationToken(
+        @Header("Authorization") refreshToken: String,
+        @Body refreshOperationToken: RefreshOperationToken
+    ): Response<TokenResponse>
+
+    @POST("/")
     suspend fun fetechQuizes()
 
     @POST("/")

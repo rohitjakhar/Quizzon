@@ -25,5 +25,15 @@
     <string name="choose_category">Choose Category</string>
     <string name="correct_option">Correct Option</string>
 
+    <string name="about_app">Quizzon is app where you can create your own quizzes and share with your contact and also can play many quiz free.</string>
+    <string name="about_developer">Rohit Jakhar created this project during Harperdb hackathon with MIT open source Licence</string>
+    <string name="about_harper">Harper db is new technology for handing data in cloude data base</string>
+
+    <string name="developer">About Developer</string>
+    <string name="harperdb">About HarperDB</string>
+    <string name="github">Github Link</string>
+    <string name="linkedIn">LinkedIn Link</string>
+    <string name="twitter">Twitter</string>
+    <string name="logout">Logout</string>
 
 </resources>

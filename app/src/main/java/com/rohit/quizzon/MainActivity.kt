@@ -1,6 +1,7 @@
 package com.rohit.quizzon
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -12,6 +13,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.rohit.quizzon.data.DataStorePreferenceStorage
 import com.rohit.quizzon.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,6 +38,16 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.home_container_view) as NavHostFragment
         val navController = fragmentManager.navController
 
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStoreRepository.refreshToken.collect {
+                Log.d("tokentest main: ", "refresh $it")
+            }
+        }
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStoreRepository.operationToken.collect {
+                Log.d("tokentest main: ", "operation: $it")
+            }
+        }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.quizListFragment -> hideBottomBar()

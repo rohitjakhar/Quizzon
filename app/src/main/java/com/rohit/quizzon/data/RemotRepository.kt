@@ -5,10 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.rohit.quizzon.BuildConfig
-import com.rohit.quizzon.data.model.body.CategoryBody
-import com.rohit.quizzon.data.model.body.QuizBody
-import com.rohit.quizzon.data.model.body.SignupBody
-import com.rohit.quizzon.data.model.body.TokenBody
+import com.rohit.quizzon.data.model.body.*
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
 import com.rohit.quizzon.data.model.response.QuizResponse
 import com.rohit.quizzon.data.model.response.SignupResponse
@@ -18,8 +15,7 @@ import com.rohit.quizzon.utils.NetworkResponse
 import com.rohit.quizzon.utils.mapToErrorResponse
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import okhttp3.Credentials
 import javax.inject.Inject
 
@@ -36,27 +32,32 @@ class RemotRepository @Inject constructor(
         try {
             val username = BuildConfig.USERNAME
             val password = BuildConfig.PASSWORD
-            val reponse = apiCall.signup(
+            val response = apiCall.signup(
                 cred = Credentials.basic(username = username, password = password),
                 signupBody
             )
-            if (reponse.isSuccessful) {
-                reponse.body()?.let {
+            if (response.isSuccessful) {
+                response.body()?.let {
                     val user = it.message ?: "er"
                     return@withContext NetworkResponse.Success(message = user, data = null)
-                } ?: return@withContext NetworkResponse.Failure(message = reponse.message())
+                } ?: return@withContext NetworkResponse.Failure(message = response.message())
             } else {
-                return@withContext NetworkResponse.Failure(mapToErrorResponse(reponse.errorBody()).error)
+                return@withContext NetworkResponse.Failure(mapToErrorResponse(response.errorBody()).error)
             }
         } catch (e: Exception) {
             return@withContext NetworkResponse.Failure("Exception : ${e.localizedMessage}")
         }
     }
+    //        val oper = withContext(IO) {
+//            dataStorePreferenceStorage.operationToken.first().trim()
+//        }
 
-    fun getCategory(): Flow<PagingData<CategoryResponseItem>> {
-        val token = getOperationToken()
+    fun getCategory(): Flow<PagingData<CategoryResponseItem>> = flow {
+        val token = withContext(IO) {
+            dataStorePreferenceStorage.operationToken.first().trim()
+        }
         Log.d("test121", token)
-        return Pager(
+        val data = Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
                 maxSize = MAX_PAGE_SIZE,
@@ -70,10 +71,32 @@ class RemotRepository @Inject constructor(
                 )
             }
         ).flow
+        emitAll(data)
+    }.flowOn(IO)
+
+    suspend fun recreateToken() {
+        val refreshToken = withContext(IO) {
+            dataStorePreferenceStorage.refreshToken.first()
+        }
+        val response =
+            apiCall.refreshOperationToken("Bearer $refreshToken", RefreshOperationToken())
+        if (response.isSuccessful) {
+            response.body()?.let {
+                val tokenRes = TokenResponse(
+                    refreshToken = refreshToken,
+                    operationToken = it.operationToken
+                )
+                dataStorePreferenceStorage.addToken(tokenRes)
+                Log.d("t5", "Added")
+            } ?: Log.d("t5", "body null")
+        } else {
+            Log.d("t5", "error: ${mapToErrorResponse(response.errorBody()).error}")
+        }
     }
 
     suspend fun uploadQuiz(quizBody: QuizBody): NetworkResponse<QuizResponse> {
-        val operationToken = getOperationToken()
+        val operationToken = "fdfs"
+
         val response = apiCall.createQuiz(
             token = operationToken,
             quizBody = quizBody
@@ -83,21 +106,13 @@ class RemotRepository @Inject constructor(
                 response.body(),
                 message = response.body()!!.message
             )
-            is NetworkResponse.Failure<*> -> NetworkResponse.Failure(mapToErrorResponse(response.errorBody()).error)
+            is NetworkResponse.Failure<*> -> NetworkResponse.Failure(
+                mapToErrorResponse(
+                    response.errorBody()
+                ).error
+            )
             else -> NetworkResponse.Failure(mapToErrorResponse(response.errorBody()).error)
         }
-    }
-
-    private fun getOperationToken(): String {
-        var operationToken = ""
-        CoroutineScope(IO).launch {
-            withContext(Dispatchers.Default) {
-                dataStorePreferenceStorage.operationToken.collectLatest {
-                    operationToken = it
-                }
-            }
-        }
-        return operationToken
     }
 
     suspend fun createToken(

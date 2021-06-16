@@ -1,6 +1,7 @@
 package com.rohit.quizzon.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,7 @@ import com.rohit.quizzon.ui.viewmodels.HomeViewModel
 import com.rohit.quizzon.utils.CategoryClickListner
 import com.rohit.quizzon.utils.autoCleaned
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), CategoryClickListner {
@@ -31,19 +32,28 @@ class HomeFragment : Fragment(), CategoryClickListner {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        loadData()
         binding.rvCategory.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = categoryAdapter
         }
-        loadData()
+
         return binding.root
     }
 
     private fun loadData() {
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            homeViewModel.listData.collectLatest {
-                categoryAdapter.submitData(it)
-            }
+        viewLifecycleOwner.lifecycleScope.launch {
+            homeViewModel.fetchCategory()
+
+            Log.d("test121", "called")
+            homeViewModel.categoryList.observe(
+                viewLifecycleOwner,
+                {
+                    categoryAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+
+                    Log.d("test121", "sizein fragment: $it")
+                }
+            )
         }
     }
 

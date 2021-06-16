@@ -18,7 +18,7 @@ class CategoryListViiewHolder(
         binding.textCategoryName.text = categoryResponseItem.categoryName
 
         binding.textCategoryName.setOnClickListener {
-            categoryClickListner.onCategoryListner(categoryResponseItem.categoryId)
+            categoryClickListner.onCategoryListner(categoryResponseItem.id.toString())
         }
     }
 

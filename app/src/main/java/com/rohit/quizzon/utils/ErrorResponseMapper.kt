@@ -6,9 +6,8 @@ import okhttp3.ResponseBody
 
 fun mapToErrorResponse(errorBody: ResponseBody?): ErrorResponse {
     val gson = Gson()
-    val error: ErrorResponse = gson.fromJson(
+    return gson.fromJson(
         errorBody?.charStream(),
         ErrorResponse::class.java
     )
-    return error
 }
