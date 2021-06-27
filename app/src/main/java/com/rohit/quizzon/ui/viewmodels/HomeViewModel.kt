@@ -1,32 +1,28 @@
 package com.rohit.quizzon.ui.viewmodels
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagingData
-import com.rohit.quizzon.data.RemotRepository
+import androidx.lifecycle.viewModelScope
+import com.rohit.quizzon.data.RemoteRepository
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
+import com.rohit.quizzon.utils.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val remoteRepository: RemotRepository
+    private val remoteRepository: RemoteRepository
 ) : ViewModel() {
 
-    private var _categoryList: MutableLiveData<PagingData<CategoryResponseItem>> =
-        MutableLiveData()
+    private var _categoryList: MutableStateFlow<NetworkResponse<List<CategoryResponseItem>>> =
+        MutableStateFlow(
+            NetworkResponse.Loading()
+        )
     val categoryList get() = _categoryList
-
-    suspend fun fetchCategory() {
-        remoteRepository.getCategory().collectLatest {
-            _categoryList.postValue(it)
-            Log.d("test121", "size: $it")
+    fun getCategoryList() {
+        viewModelScope.launch {
+            _categoryList.value = remoteRepository.categoryList()
         }
-    }
-
-    suspend fun recreateToken() {
-        remoteRepository.recreateToken()
     }
 }

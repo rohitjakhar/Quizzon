@@ -3,24 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/authHomeFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.rohit.quizzon.ui.fragment.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_authHomeFragment"
+            app:destination="@id/authHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.rohit.quizzon.ui.fragment.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_authHomeFragment"
+            app:destination="@id/authHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.rohit.quizzon.ui.fragment.ForgetPasswordFragment"
+        android:label="fragment_forget_password"
+        tools:layout="@layout/fragment_forget_password" />
+    <fragment
+        android:id="@+id/authHomeFragment"
+        android:name="com.rohit.quizzon.ui.fragment.AuthHomeFragment"
+        android:label="fragment_auth_home"
+        tools:layout="@layout/fragment_auth_home">
+        <action
+            android:id="@+id/action_authHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_authHomeFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
     </fragment>
 </navigation>

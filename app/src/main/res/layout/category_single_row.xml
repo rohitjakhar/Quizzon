@@ -7,12 +7,15 @@
     app:strokeColor="@color/teal_200"
     app:strokeWidth="1dp"
     app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/categoryConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
+        android:background="@drawable/category_background_1"
         >
 
         <TextView
@@ -22,7 +25,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="English" />
+            tools:text="English"
+            android:textSize="32sp"
+            android:textColor="@color/blue_grey_900"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

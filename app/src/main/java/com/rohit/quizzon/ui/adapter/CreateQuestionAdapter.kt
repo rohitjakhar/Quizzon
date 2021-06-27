@@ -5,11 +5,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.rohit.quizzon.data.model.CreateQuestionData
 import com.rohit.quizzon.ui.viewholder.CreateQuestionViewHolder
+import com.rohit.quizzon.utils.listener.CreateQuizListener
 
-class CreateQuestionAdapter() :
+class CreateQuestionAdapter(
+    private val createQuizListener: CreateQuizListener
+) :
     ListAdapter<CreateQuestionData, CreateQuestionViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreateQuestionViewHolder {
-        return CreateQuestionViewHolder.create(parent)
+        return CreateQuestionViewHolder.create(parent, createQuizListener)
     }
 
     override fun onBindViewHolder(holder: CreateQuestionViewHolder, position: Int) {

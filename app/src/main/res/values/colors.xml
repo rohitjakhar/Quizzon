@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="periwinkle_gray">#CAD5E2</color>
+    <color name="pink_50">#F7E1ED</color>
+    <color name="purple_50">#FDF7FF</color>
+    <color name="shimmer_placeholder">#dddd</color>
+    <color name="green_a700">#00AB5C</color>
+    <color name="teal_600">#00A066</color>
+    <color name="blue_grey_900">#1D1D35</color>
 </resources>

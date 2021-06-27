@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.rohit.quizzon.R
 import com.rohit.quizzon.databinding.ActivityAuthBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +19,7 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.hide()
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -34,7 +34,7 @@ class AuthActivity : AppCompatActivity() {
                 R.id.signupFragment
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {

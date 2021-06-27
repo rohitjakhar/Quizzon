@@ -24,6 +24,7 @@
     <string name="save">Save</string>
     <string name="choose_category">Choose Category</string>
     <string name="correct_option">Correct Option</string>
+    <style name="all_quizzes">All Quiz</style>
 
     <string name="about_app">Quizzon is app where you can create your own quizzes and share with your contact and also can play many quiz free.</string>
     <string name="about_developer">Rohit Jakhar created this project during Harperdb hackathon with MIT open source Licence</string>
@@ -35,5 +36,27 @@
     <string name="linkedIn">LinkedIn Link</string>
     <string name="twitter">Twitter</string>
     <string name="logout">Logout</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="send_email">Send Email</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="quizzon_tag_line">Create and Play Unlimited Quizzes</string>
+    <string name="create_quiz">Create Quiz</string>
+    <string name="join_quiz">Join Quiz</string>
+    <string name="check_answer">Check Answer</string>
+    <string name="answer">Answer</string>
+    <string name="all_quiz">All Quiz</string>
+    <string name="login_line">Already have an account? Login</string>
+    <string name="questions">Questions:</string>
+    <string name="login_sucess">Login Success</string>
+    <string name="login_success">Login Sucess</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="play_quiz">Play Quiz</string>
+    <string name="result">Result</string>
+    <string name="start">Start</string>
+    <string name="back">back</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_to_continue">Login to continue</string>
+    <string name="hi">Hi!</string>
+    <string name="create_a_new_account">Create a new account</string>
 
 </resources>

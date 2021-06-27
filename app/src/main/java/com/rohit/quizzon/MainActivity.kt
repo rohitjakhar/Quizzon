@@ -1,7 +1,6 @@
 package com.rohit.quizzon
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -13,10 +12,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.rohit.quizzon.data.DataStorePreferenceStorage
 import com.rohit.quizzon.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,39 +26,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.bottomNavigationBar.background = null
-        binding.bottomNavigationBar.menu.getItem(2).isEnabled = false
 
         val fragmentManager: NavHostFragment =
             supportFragmentManager.findFragmentById(R.id.home_container_view) as NavHostFragment
         val navController = fragmentManager.navController
 
-        GlobalScope.launch(Dispatchers.IO) {
-            dataStoreRepository.refreshToken.collect {
-                Log.d("tokentest main: ", "refresh $it")
-            }
-        }
-        GlobalScope.launch(Dispatchers.IO) {
-            dataStoreRepository.operationToken.collect {
-                Log.d("tokentest main: ", "operation: $it")
-            }
-        }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.quizListFragment -> hideBottomBar()
-                R.id.createQuizFragment -> hideBottomBar()
+                R.id.quizFragment -> hideBottomBar()
+                R.id.nav_create_quiz -> hideBottomBar()
                 else -> showBottomBar()
             }
-        }
-
-        binding.createQuiz.setOnClickListener {
-            navController.navigate(R.id.createQuizFragment)
         }
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home,
-                R.id.nav_search,
+                R.id.nav_all_quiz,
                 R.id.nav_profile,
                 R.id.nav_about,
             )
@@ -74,15 +54,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun showBottomBar() {
         with(binding) {
-            bottomAppBar.visibility = View.VISIBLE
-            createQuiz.visibility = View.VISIBLE
+            bottomNavigationBar.visibility = View.VISIBLE
+            bottomNavigationBar.visibility = View.VISIBLE
         }
     }
 
     private fun hideBottomBar() {
         with(binding) {
-            bottomAppBar.visibility = View.GONE
-            createQuiz.visibility = View.GONE
+            bottomNavigationBar.visibility = View.GONE
+            bottomNavigationBar.visibility = View.GONE
         }
     }
 

@@ -1,60 +1,94 @@
 package com.rohit.quizzon.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rohit.quizzon.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.rohit.quizzon.data.model.response.QuizResponse
+import com.rohit.quizzon.databinding.FragmentSearchBinding
+import com.rohit.quizzon.ui.adapter.QuizAdapter
+import com.rohit.quizzon.ui.viewmodels.SearchViewModel
+import com.rohit.quizzon.utils.NetworkResponse
+import com.rohit.quizzon.utils.listener.QuizClickListener
+import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.shortToast
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class SearchFragment : Fragment(), QuizClickListener {
+    private var binding: FragmentSearchBinding by autoCleaned()
+    private val searchViewModel: SearchViewModel by viewModels()
+    private val quizAdapter: QuizAdapter by autoCleaned { QuizAdapter(this) }
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        startShimmer()
+        binding.quizRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = quizAdapter
+        }
+        searchQuiz()
+        searchViewModel.getQuizList()
+        loadData()
+        return binding.root
+    }
+
+    private fun searchQuiz() {
+    }
+
+    private fun loadData() {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            searchViewModel.quizList.collectLatest {
+                when (it) {
+                    is NetworkResponse.Success -> {
+                        quizAdapter.submitList(it.data)
+                        stopShimmer()
+                    }
+                    is NetworkResponse.Failure -> {
+                        it.message?.let { it1 -> shortToast(it1) }
+                        stopShimmer()
+                    }
+                    is NetworkResponse.Loading -> {
+                        startShimmer()
+                        // Todo show loading process 
+                    }
+                }
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    override fun quizClickListener(quizListBody: QuizResponse) {
+        findNavController().navigate(
+            SearchFragmentDirections.actionNavSearchToQuizFragment(
+                quizListBody
+            )
+        )
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun startShimmer() {
+        binding.apply {
+            homeShimmerEffect.visibility = View.VISIBLE
+            homeShimmerEffect.startShimmer()
+            quizRecyclerView.visibility = View.GONE
+        }
+    }
+
+    private fun stopShimmer() {
+        binding.apply {
+            homeShimmerEffect.visibility = View.GONE
+            homeShimmerEffect.stopShimmer()
+            quizRecyclerView.visibility = View.VISIBLE
+        }
     }
 }

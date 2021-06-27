@@ -38,7 +38,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/edOption1"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    style="@style/CustomInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/option1"
@@ -93,18 +93,17 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/correct_option"
+                    android:hint="@string/answer"
                     android:id="@+id/answerId"
                     android:padding="8dp">
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
-                        />
+                        android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
@@ -115,20 +114,23 @@
                     android:padding="8dp">
 
                     <TextView
+                        android:padding="8dp"
                         android:id="@+id/textCancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
-                        android:text="Cancel"
-                        android:textSize="16dp" />
+                        android:text="@string/cancel"
+                        android:textSize="16sp" />
 
                     <TextView
+                        android:padding="8dp"
+                        android:textColor="@color/green_a700"
                         android:id="@+id/textAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
-                        android:text="Add"
-                        android:textSize="16dp" />
+                        android:text="@string/add"
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

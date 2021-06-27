@@ -3,11 +3,13 @@ package com.rohit.quizzon.data
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import com.rohit.quizzon.data.model.response.TokenResponse
+import com.rohit.quizzon.data.model.body.UserProfileBody
 import com.rohit.quizzon.utils.PreferenceDataStore
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_LOGGED_IN
-import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_OPERATION_TOKEN
-import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_REFRESH_TOKEN
+import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_GENDER
+import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_ID
+import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_NAME
+import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USE_EMAIL
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -25,13 +27,24 @@ class DataStorePreferenceStorage @Inject constructor(
     override val isLoggedIn: Flow<Boolean> =
         dataStore.data.map { it[PREF_LOGGED_IN] ?: false }
 
-    override val refreshToken: Flow<String>
+    override val userProfile: Flow<UserProfileBody>
         get() = dataStore.data.map {
-            it[PREF_REFRESH_TOKEN] ?: ""
+            UserProfileBody(
+                username = it[PREF_USER_NAME] ?: "",
+                user_id = it[PREF_USER_ID] ?: "",
+                userEmail = it[PREF_USE_EMAIL] ?: "",
+                gender = it[PREF_USER_GENDER] ?: "male"
+            )
         }
 
-    override val operationToken: Flow<String>
-        get() = dataStore.data.map { it[PREF_OPERATION_TOKEN] ?: "" }
+    override suspend fun saveUserData(user: UserProfileBody) {
+        dataStore.edit { mutablePreferences ->
+            mutablePreferences[PREF_USER_NAME] = user.username
+            mutablePreferences[PREF_USE_EMAIL] = user.userEmail
+            mutablePreferences[PREF_USER_ID] = user.user_id
+            mutablePreferences[PREF_USER_GENDER] = user.gender
+        }
+    }
 
     override suspend fun isLogin(isLogin: Boolean) {
         dataStore.edit { mutablePreferences ->
@@ -39,10 +52,7 @@ class DataStorePreferenceStorage @Inject constructor(
         }
     }
 
-    override suspend fun addToken(tokenResponse: TokenResponse) {
-        dataStore.edit { mutablePreferences ->
-            mutablePreferences[PREF_OPERATION_TOKEN] = tokenResponse.operationToken
-            mutablePreferences[PREF_REFRESH_TOKEN] = tokenResponse.refreshToken
-        }
+    override suspend fun clearData() {
+        dataStore.edit { it.clear() }
     }
 }

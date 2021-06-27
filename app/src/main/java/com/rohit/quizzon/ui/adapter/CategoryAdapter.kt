@@ -1,25 +1,23 @@
 package com.rohit.quizzon.ui.adapter
 
-import android.util.Log
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
 import com.rohit.quizzon.ui.viewholder.CategoryListViiewHolder
-import com.rohit.quizzon.utils.CategoryClickListner
+import com.rohit.quizzon.utils.listener.CategoryClickListner
 
 class CategoryAdapter(
-    private val categoryClickListener: CategoryClickListner
+    private val categoryClickListner: CategoryClickListner
 ) :
-    PagingDataAdapter<CategoryResponseItem, CategoryListViiewHolder>(CategoryItemDiffUtil) {
+    ListAdapter<CategoryResponseItem, CategoryListViiewHolder>(CategoryItemDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryListViiewHolder {
         return CategoryListViiewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: CategoryListViiewHolder, position: Int) {
         getItem(position)?.let {
-            Log.d("tetee", "list: $it")
-            holder.bind(it, categoryClickListner = categoryClickListener)
+            holder.bind(it, categoryClickListner = categoryClickListner)
         }
     }
 

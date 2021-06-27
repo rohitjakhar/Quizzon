@@ -2,24 +2,23 @@ package com.rohit.quizzon.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.rohit.quizzon.MainActivity
-import com.rohit.quizzon.data.model.response.TokenResponse
 import com.rohit.quizzon.databinding.FragmentLoginBinding
 import com.rohit.quizzon.ui.viewmodels.LoginViewModel
 import com.rohit.quizzon.utils.NetworkResponse
 import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -27,6 +26,8 @@ class LoginFragment : Fragment() {
     private var binding: FragmentLoginBinding by autoCleaned()
     private val loginViewModel: LoginViewModel by viewModels()
 
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,70 +35,89 @@ class LoginFragment : Fragment() {
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        binding.btnUserSignup.setOnClickListener {
-            validateInputs(
-                binding.userEmailInputLayout.editText?.text.toString().trim(),
-                binding.userPasswordInputLayout.editText?.text.toString().trim()
-            )
-        }
+        initViewForProgress()
+        initClickListener()
 
+        binding.textForgetPassword.setOnClickListener {
+            val ac = LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment()
+            findNavController().navigate(ac)
+        }
         binding.textRegisterAccount.setOnClickListener {
             val loginToSignup = LoginFragmentDirections.actionLoginFragmentToSignupFragment()
             findNavController().navigate(loginToSignup)
         }
 
+        binding.fabBackButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
         return binding.root
+    }
+
+    private fun initClickListener() = binding.apply {
+        btnUserLogin.setOnClickListener {
+            val email = binding.userEmailInputLayout.editText?.text.toString().trim()
+            val password = binding.userPasswordInputLayout.editText?.text.toString().trim()
+            if (validateInputs(email, password)) {
+                btnUserLogin.activate()
+                loginViewModel.loginUser(email, password)
+                checkLoginState()
+            }
+        }
+    }
+
+    private fun initViewForProgress() {
+        binding.apply {
+            btnUserLogin.setDisableViews(
+                listOf(
+                    userEmailInputLayout,
+                    userPasswordInputLayout,
+                    textForgetPassword,
+                    textRegisterAccount,
+                    fabBackButton
+                )
+            )
+        }
     }
 
     private fun validateInputs(
         userEmail: String,
         userPassword: String
-    ) {
-        if (userEmail.length < 4) {
-            binding.userEmailInputLayout.error = "Enter Email"
-            return
+    ): Boolean {
+        return when {
+            userEmail.length < 4 -> {
+                binding.userEmailInputLayout.error = "Enter Email"
+                false
+            }
+            userPassword.length < 4 -> {
+                binding.userPasswordInputLayout.error = "Enter Password"
+                false
+            }
+            else -> true
         }
-        if (userPassword.length < 4) {
-            binding.userPasswordInputLayout.error = "Enter Password"
-            return
-        }
-        createToken(
-            userEmail,
-            userPassword
-        )
     }
 
-    private fun createToken(userEmail: String, userPassword: String) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            loginViewModel.loginUser(
-                userEmail,
-                userPassword
-            )
-            loginViewModel.tokenResponse.collectLatest { value: NetworkResponse<TokenResponse> ->
+    private fun checkLoginState() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            loginViewModel.loginState.collectLatest { value ->
                 when (value) {
                     is NetworkResponse.Success -> {
-                        loginViewModel.saveToken(value.data!!)
-                        Log.d("test22", "toek: ${value.data.operationToken}")
+                        binding.btnUserLogin.setFinishedText("Log in")
+                        binding.btnUserLogin.enableVibration()
+                        binding.btnUserLogin.finished()
+                        shortToast(value.message!!)
                         requireActivity().apply {
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }
                     }
                     is NetworkResponse.Failure -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "${value.message}",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        binding.btnUserLogin.setFinishedText("Error: Try Again")
+                        binding.btnUserLogin.finished()
+                        binding.btnUserLogin.reset()
+                        shortToast("${value.message}")
                     }
-                    else -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "${value.message}",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                    is NetworkResponse.Loading -> {
+                        binding.btnUserLogin.activate()
                     }
                 }
             }

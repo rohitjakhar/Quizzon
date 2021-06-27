@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
 import com.rohit.quizzon.databinding.CategorySingleRowBinding
-import com.rohit.quizzon.utils.CategoryClickListner
+import com.rohit.quizzon.utils.listener.CategoryClickListner
 
 class CategoryListViiewHolder(
     private val binding: CategorySingleRowBinding
@@ -18,7 +18,7 @@ class CategoryListViiewHolder(
         binding.textCategoryName.text = categoryResponseItem.categoryName
 
         binding.textCategoryName.setOnClickListener {
-            categoryClickListner.onCategoryListner(categoryResponseItem.id.toString())
+            categoryClickListner.onCategoryListner(categoryResponseItem.id)
         }
     }
 

@@ -25,10 +25,14 @@
         android:label="@string/about"
         tools:layout="@layout/fragment_about" />
     <fragment
-        android:id="@+id/nav_search"
+        android:id="@+id/nav_all_quiz"
         android:name="com.rohit.quizzon.ui.fragment.SearchFragment"
-        android:label="@string/search"
-        tools:layout="@layout/fragment_search" />
+        android:label="@string/all_quiz"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_nav_search_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
     <fragment
         android:id="@+id/quizListFragment"
         android:name="com.rohit.quizzon.ui.fragment.QuizListFragment"
@@ -37,10 +41,31 @@
         <argument
             android:name="category_id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_quizListFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
     <fragment
-        android:id="@+id/createQuizFragment"
+        android:id="@+id/nav_create_quiz"
         android:name="com.rohit.quizzon.ui.fragment.CreateQuizFragment"
-        android:label="fragment_create_quiz"
-        tools:layout="@layout/fragment_create_quiz" />
+    android:label="@string/create_quiz"
+        tools:layout="@layout/fragment_create_quiz" >
+        <action
+            android:id="@+id/action_createQuizFragment_to_home_nav"
+            app:popUpTo="@id/home_nav" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.rohit.quizzon.ui.fragment.PlayQuizFragment"
+        android:label="@string/play_quiz"
+        tools:layout="@layout/fragment_play_quiz">
+        <argument
+            android:name="quizData"
+            app:argType="com.rohit.quizzon.data.model.response.QuizResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.rohit.quizzon.ResultFragment"
+        android:label="@string/result"
+        tools:layout="@layout/fragment_result" />
 </navigation>

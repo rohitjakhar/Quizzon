@@ -1,7 +1,6 @@
 package com.rohit.quizzon.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rohit.quizzon.databinding.FragmentHomeBinding
 import com.rohit.quizzon.ui.adapter.CategoryAdapter
 import com.rohit.quizzon.ui.viewmodels.HomeViewModel
-import com.rohit.quizzon.utils.CategoryClickListner
+import com.rohit.quizzon.utils.listener.CategoryClickListner
+import com.rohit.quizzon.utils.NetworkResponse
 import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.shortToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), CategoryClickListner {
@@ -32,28 +33,33 @@ class HomeFragment : Fragment(), CategoryClickListner {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        loadData()
+        startShimmer()
         binding.rvCategory.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = categoryAdapter
         }
-
+        homeViewModel.getCategoryList()
+        loadData()
         return binding.root
     }
 
     private fun loadData() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            homeViewModel.fetchCategory()
-
-            Log.d("test121", "called")
-            homeViewModel.categoryList.observe(
-                viewLifecycleOwner,
-                {
-                    categoryAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-
-                    Log.d("test121", "sizein fragment: $it")
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            homeViewModel.categoryList.collectLatest {
+                when (it) {
+                    is NetworkResponse.Success -> {
+                        categoryAdapter.submitList(it.data)
+                        stopShimmer()
+                    }
+                    is NetworkResponse.Failure -> {
+                        stopShimmer()
+                        it.message?.let { it1 -> shortToast(it1) }
+                    }
+                    is NetworkResponse.Loading -> {
+                        startShimmer()
+                    }
                 }
-            )
+            }
         }
     }
 
@@ -61,5 +67,21 @@ class HomeFragment : Fragment(), CategoryClickListner {
         Toast.makeText(requireContext(), "Clicked on $category_id", Toast.LENGTH_LONG).show()
         val ac = HomeFragmentDirections.actionNavHomeToQuizListFragment(category_id)
         findNavController().navigate(ac)
+    }
+
+    private fun startShimmer() {
+        binding.apply {
+            homeShimmerEffect.visibility = View.VISIBLE
+            homeShimmerEffect.startShimmer()
+            rvCategory.visibility = View.GONE
+        }
+    }
+
+    private fun stopShimmer() {
+        binding.apply {
+            homeShimmerEffect.visibility = View.GONE
+            homeShimmerEffect.stopShimmer()
+            rvCategory.visibility = View.VISIBLE
+        }
     }
 }

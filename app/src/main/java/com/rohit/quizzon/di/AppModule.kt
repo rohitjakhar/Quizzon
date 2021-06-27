@@ -6,10 +6,13 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.rohit.quizzon.data.DataStorePreferenceStorage
 import com.rohit.quizzon.data.DataStorePreferenceStorage.Companion.PREFS_NAME
 import com.rohit.quizzon.data.QuizService
-import com.rohit.quizzon.data.RemotRepository
+import com.rohit.quizzon.data.RemoteRepository
 import com.rohit.quizzon.utils.Config.Companion.BASE_URL
 import com.rohit.quizzon.utils.PreferenceDataStore
 import dagger.Module
@@ -17,7 +20,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.collect
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,6 +43,10 @@ object AppModule {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }
+
+    @Provides
+    @Singleton
+    fun providesFirebaseAuth() = Firebase.auth
 
     @Provides
     @Singleton
@@ -84,9 +90,11 @@ object AppModule {
     @Singleton
     fun provideRemoteRepository(
         apiCall: QuizService,
-        dataStorePreferenceStorage: DataStorePreferenceStorage
-    ): RemotRepository = RemotRepository(
+        dataStorePreferenceStorage: DataStorePreferenceStorage,
+        firebaseAuth: FirebaseAuth
+    ): RemoteRepository = RemoteRepository(
         apiCall = apiCall,
-        dataStorePreferenceStorage = dataStorePreferenceStorage
+        dataStorePreferenceStorage = dataStorePreferenceStorage,
+        firebaseAuth = firebaseAuth
     )
 }
