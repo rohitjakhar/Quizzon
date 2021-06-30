@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rohit.quizzon.data.model.response.QuizResponse
-import com.rohit.quizzon.databinding.QuizSingleRowBinding
+import com.rohit.quizzon.databinding.SingleQuizBinding
 import com.rohit.quizzon.utils.listener.QuizClickListener
 
 class QuizListViewHolder(
-    private val binding: QuizSingleRowBinding
+    private val binding: SingleQuizBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("SetTextI18n")
@@ -26,7 +26,7 @@ class QuizListViewHolder(
     companion object {
         fun create(parent: ViewGroup): QuizListViewHolder {
             val mView = LayoutInflater.from(parent.context)
-            val binding = QuizSingleRowBinding.inflate(mView, parent, false)
+            val binding = SingleQuizBinding.inflate(mView, parent, false)
             return QuizListViewHolder(binding = binding)
         }
     }

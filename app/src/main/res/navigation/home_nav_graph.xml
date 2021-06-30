@@ -9,10 +9,18 @@
         android:id="@+id/nav_home"
         android:name="com.rohit.quizzon.ui.fragment.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_quizListFragment"
             app:destination="@id/quizListFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_create_quiz"
+            app:destination="@id/nav_create_quiz"
+            app:enterAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/scale_down" />
+        <action
+            android:id="@+id/action_nav_home_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
@@ -35,9 +43,9 @@
     </fragment>
     <fragment
         android:id="@+id/quizListFragment"
-        android:name="com.rohit.quizzon.ui.fragment.QuizListFragment"
-        android:label="fragment_quiz_list"
-        tools:layout="@layout/fragment_quiz_list" >
+        android:name="com.rohit.quizzon.ui.fragment.QuizAllFragment"
+        android:label="@string/quiz_list"
+        tools:layout="@layout/fragment_quiz_all">
         <argument
             android:name="category_id"
             app:argType="string" />
@@ -48,8 +56,8 @@
     <fragment
         android:id="@+id/nav_create_quiz"
         android:name="com.rohit.quizzon.ui.fragment.CreateQuizFragment"
-    android:label="@string/create_quiz"
-        tools:layout="@layout/fragment_create_quiz" >
+        android:label="@string/create_quiz"
+        tools:layout="@layout/fragment_create_quiz">
         <action
             android:id="@+id/action_createQuizFragment_to_home_nav"
             app:popUpTo="@id/home_nav" />
@@ -62,10 +70,19 @@
         <argument
             android:name="quizData"
             app:argType="com.rohit.quizzon.data.model.response.QuizResponse" />
+        <action
+            android:id="@+id/action_quizFragment_to_resultFragment"
+            app:destination="@id/resultFragment"
+            app:popUpTo="@id/home_nav"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.rohit.quizzon.ResultFragment"
+        android:name="com.rohit.quizzon.ui.fragment.ResultFragment"
         android:label="@string/result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result">
+        <argument
+            android:name="quizResult"
+            app:argType="com.rohit.quizzon.data.model.QuizResult" />
+    </fragment>
 </navigation>

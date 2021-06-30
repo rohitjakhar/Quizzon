@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rohit.quizzon.data.model.CreateQuestionData
-import com.rohit.quizzon.databinding.CreateQuestionSingleRowBinding
+import com.rohit.quizzon.databinding.SingleCreateQuestionBinding
 import com.rohit.quizzon.utils.listener.CreateQuizListener
 
 class CreateQuestionViewHolder(
-    private val binding: CreateQuestionSingleRowBinding,
+    private val binding: SingleCreateQuestionBinding,
     private val createQuizListener: CreateQuizListener
 ) :
     RecyclerView.ViewHolder(binding.root) {
@@ -34,7 +34,7 @@ class CreateQuestionViewHolder(
             createQuizListener: CreateQuizListener
         ): CreateQuestionViewHolder {
             val mView = LayoutInflater.from(parent.context)
-            val binding = CreateQuestionSingleRowBinding.inflate(mView, parent, false)
+            val binding = SingleCreateQuestionBinding.inflate(mView, parent, false)
             return CreateQuestionViewHolder(binding, createQuizListener)
         }
     }

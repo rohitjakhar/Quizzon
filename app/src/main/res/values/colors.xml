@@ -14,4 +14,8 @@
     <color name="green_a700">#00AB5C</color>
     <color name="teal_600">#00A066</color>
     <color name="blue_grey_900">#1D1D35</color>
+    <color name="pink_a100">#FF9A9E</color>
+    <color name="deep_orange_100">#FAD0C4</color>
+    <color name="cyan_a400">#00F2FE</color>
+    <color name="blue_400">#4FACFE</color>
 </resources>

@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.edit
 import com.rohit.quizzon.data.model.body.UserProfileBody
 import com.rohit.quizzon.utils.PreferenceDataStore
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_LOGGED_IN
-import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_GENDER
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_ID
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_NAME
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USE_EMAIL
@@ -32,8 +31,7 @@ class DataStorePreferenceStorage @Inject constructor(
             UserProfileBody(
                 username = it[PREF_USER_NAME] ?: "",
                 user_id = it[PREF_USER_ID] ?: "",
-                userEmail = it[PREF_USE_EMAIL] ?: "",
-                gender = it[PREF_USER_GENDER] ?: "male"
+                userEmail = it[PREF_USE_EMAIL] ?: ""
             )
         }
 
@@ -42,7 +40,6 @@ class DataStorePreferenceStorage @Inject constructor(
             mutablePreferences[PREF_USER_NAME] = user.username
             mutablePreferences[PREF_USE_EMAIL] = user.userEmail
             mutablePreferences[PREF_USER_ID] = user.user_id
-            mutablePreferences[PREF_USER_GENDER] = user.gender
         }
     }
 

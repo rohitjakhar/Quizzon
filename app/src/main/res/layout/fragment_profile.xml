@@ -4,46 +4,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="16dp"
     tools:context=".ui.fragment.ProfileFragment">
 
-    <TextView
-        android:id="@+id/textUserName"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/roundCorner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        tools:text="Name: Rohit Jakhar"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:alpha="0.7"
+            android:background="@drawable/bottom_round_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="80dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/black_500"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/category_background_1"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/textUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Name: Rohit Jakhar" />
+
+            <TextView
+                android:id="@+id/textUserEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textUserName"
+                app:layout_constraintTop_toBottomOf="@+id/textUserName"
+                tools:text="Email: rohitjakhar940@gmail.com" />
+
+            <TextView
+                android:id="@+id/textUserNumberOfQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textUserEmail"
+                app:layout_constraintTop_toBottomOf="@+id/textUserEmail"
+                tools:text="Total Quiz Create: 10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
     <TextView
-        android:id="@+id/textUserEmail"
+        android:id="@+id/textQuizList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        tools:text="Email: rohitjakhar940@gmail.com"
+        android:text="@string/quiz_created"
         android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvUserInfo" />
+
+    <TextView
+        android:id="@+id/textEmptyData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_quiz_created"
+        android:textColor="@color/black_500"
         android:textSize="24sp"
-        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/textQuizList"
+        tools:listitem="@layout/single_create_question" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
+        android:id="@+id/btnRetryButton"
         style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/retry"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnUserLogout"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp"
-        android:layout_margin="8dp"
-        android:text="@string/logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textQuizList"
+        tools:listitem="@layout/single_create_question" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/homeShimmerEffect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnUserLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textQuizList"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_placeholder" />
+
+            <include layout="@layout/shimmer_placeholder" />
+
+            <include layout="@layout/shimmer_placeholder" />
+
+            <include layout="@layout/shimmer_placeholder" />
+
+            <include layout="@layout/shimmer_placeholder" />
+
+            <include layout="@layout/shimmer_placeholder" />
+
+            <include layout="@layout/shimmer_placeholder" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUserQuizzes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnUserLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textQuizList"
+        tools:listitem="@layout/single_user_quiz" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnUserLogout"
-        />
+        style="@style/CustomButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

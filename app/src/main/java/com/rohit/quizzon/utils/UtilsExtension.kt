@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
 fun Context.shortToast(message: String) {
@@ -65,4 +66,20 @@ fun MaterialAlertDialogBuilder.showInput(
 fun DialogInterface.inputText(tilId: Int): String {
     return (this as AlertDialog).findViewById<TextInputLayout>(tilId)?.editText?.text?.toString()
         .orEmpty()
+}
+
+inline fun View.snack(message: String, length: Int = Snackbar.LENGTH_LONG, f: Snackbar.() -> Unit) {
+    val snack = Snackbar.make(this, message, length)
+    snack.f()
+    snack.show()
+}
+
+fun Snackbar.action(action: String, color: Int? = null, listener: (View) -> Unit) {
+    setAction(action, listener)
+    color?.let { setActionTextColor(color) }
+}
+
+fun Int.divideToPercent(divideTo: Int): Int {
+    return if (divideTo == 0) 0
+    else (this.toDouble() / divideTo).toInt() * 100
 }

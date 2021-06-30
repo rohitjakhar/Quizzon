@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.rohit.quizzon.databinding.FragmentForgetPasswordBinding
+import com.rohit.quizzon.utils.action
 import com.rohit.quizzon.utils.autoCleaned
-import com.rohit.quizzon.utils.shortToast
+import com.rohit.quizzon.utils.snack
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,8 +23,7 @@ class ForgetPasswordFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         binding = FragmentForgetPasswordBinding.inflate(inflater, container, false)
 
         binding.btnForgetEmail.setOnClickListener {
@@ -31,9 +31,13 @@ class ForgetPasswordFragment : Fragment() {
             if (email.isNotEmpty() && email.length > 5) {
                 firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        shortToast("Email sent check your inbox")
+                        binding.root.snack("${it.result}") {
+                            action("ok") {}
+                        }
                     } else {
-                        shortToast("Email not send: ${it.exception?.localizedMessage}")
+                        binding.root.snack("Error:${it.exception?.localizedMessage}") {
+                            action("ok") {}
+                        }
                     }
                 }
             }

@@ -29,7 +29,7 @@ class CreateQuizViewModel @Inject constructor(
     val uploadResponse get() = _uploadResponse
 
     private var _userProfile: MutableStateFlow<UserProfileBody> =
-        MutableStateFlow(UserProfileBody("", "", "", ""))
+        MutableStateFlow(UserProfileBody("", "", ""))
     val userProfile get() = _userProfile
 
     fun getUserProfile() {

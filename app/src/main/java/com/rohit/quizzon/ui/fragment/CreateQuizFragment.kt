@@ -1,39 +1,43 @@
 package com.rohit.quizzon.ui.fragment
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.core.view.isVisible
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.rohit.quizzon.R
 import com.rohit.quizzon.data.model.CreateQuestionData
 import com.rohit.quizzon.data.model.body.QuestionBody
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
+import com.rohit.quizzon.databinding.DialogQuestionAddBinding
 import com.rohit.quizzon.databinding.FragmentCreateQuizBinding
-import com.rohit.quizzon.databinding.QuestionDialogBinding
-import com.rohit.quizzon.ui.adapter.CreateQuestionAdapter
+import com.rohit.quizzon.ui.adapter.QuestionAdapter
 import com.rohit.quizzon.ui.viewmodels.CreateQuizViewModel
 import com.rohit.quizzon.utils.NetworkResponse
+import com.rohit.quizzon.utils.action
 import com.rohit.quizzon.utils.autoCleaned
 import com.rohit.quizzon.utils.listener.CreateQuizListener
 import com.rohit.quizzon.utils.shortToast
+import com.rohit.quizzon.utils.snack
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class CreateQuizFragment : Fragment(), CreateQuizListener {
 
     private var binding: FragmentCreateQuizBinding by autoCleaned()
-    private val createQuestionAdapter: CreateQuestionAdapter by autoCleaned {
-        CreateQuestionAdapter(
+    private val createQuestionAdapter: QuestionAdapter by autoCleaned {
+        QuestionAdapter(
             this
         )
     }
@@ -44,7 +48,6 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
     private lateinit var selectedCategory: CategoryResponseItem
     private var userName: String = ""
     private var userId: String = ""
-    private var answer: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,6 +86,7 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
                     is NetworkResponse.Success -> it.data?.let { it1 -> categoryList.addAll(it1) }
                     is NetworkResponse.Failure -> {
                         shortToast("Cant Load Please Refresh")
+                        findNavController().navigateUp()
                     }
                     is NetworkResponse.Loading -> {
                         // TODO show progress bar
@@ -122,9 +126,7 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun showDialog() {
-
-        val mView = QuestionDialogBinding.inflate(LayoutInflater.from(requireContext()))
-
+        val mView = DialogQuestionAddBinding.inflate(layoutInflater)
         val dialog = MaterialAlertDialogBuilder(requireContext()).create()
         dialog.setView(mView.root)
         dialog.setTitle("Add Questions")
@@ -232,19 +234,21 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
             total_question = createQuestionAdapter.itemCount
         )
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            findNavController().navigateUp()
             createQuizViewModel.uploadQuiz(questionBody)
-            createQuizViewModel.uploadResponse.collectLatest {
-                when (it) {
+            createQuizViewModel.uploadResponse.collectLatest { networkResponse ->
+                when (networkResponse) {
                     is NetworkResponse.Success -> {
                         binding.btnSaveQuiz.finished()
-                        hideViews()
-                        showSuccessAnimation()
-                        delay(1500)
-                        findNavController().navigate(CreateQuizFragmentDirections.actionCreateQuizFragmentToHomeNav())
+                        binding.root.snack("Quiz Created! Copy quiz id") {
+                            action("Copy") {
+                                copyQuizId(networkResponse.data?.insertedHashes?.get(0))
+                            }
+                        }
+                        findNavController().navigateUp()
                     }
                     is NetworkResponse.Failure -> {
-                        shortToast("error: ${it.message}")
+                        binding.root.snack("${networkResponse.message}") {
+                        }
                         binding.btnSaveQuiz.reset()
                     }
                     is NetworkResponse.Loading -> {
@@ -255,31 +259,13 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
         }
     }
 
-    private fun hideViews() = binding.apply {
-        btnSaveQuiz.isVisible = false
-        inputQuizTitle.isVisible = false
-        categoryQuiz.isVisible = false
-        btnSaveQuiz.isVisible = false
-        rvQuestionList.isVisible = false
-        textQuestions.isVisible = false
-    }
-
-    private fun showSuccessAnimation() = binding.apply {
-        successBackgroundView.animate()
-            .alpha(1f)
-            .duration = 400L
-        successBackgroundView.animate()
-            .rotationBy(720f)
-            .duration = 600L
-        successBackgroundView.animate()
-            .scaleXBy(3000f)
-            .duration = 800L
-        successBackgroundView.animate()
-            .scaleYBy(3000f)
-            .duration = 800L
-        imgDone.animate()
-            .alpha(1f)
-            .duration = 1400L
+    private fun copyQuizId(quizId: String?) {
+        if (!quizId.isNullOrEmpty()) {
+            val clipboardManager =
+                getSystemService(requireContext(), ClipboardManager::class.java) as ClipboardManager
+            val clipData = ClipData.newPlainText("text", quizId)
+            clipboardManager.setPrimaryClip(clipData)
+        }
     }
 
     private fun saveDataToList(

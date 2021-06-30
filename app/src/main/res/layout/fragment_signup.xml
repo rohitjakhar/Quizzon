@@ -15,7 +15,8 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/back"
         android:src="@drawable/ic_back"
-        app:backgroundTint="@color/white"
+        app:backgroundTint="@android:color/transparent"
+        app:elevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,21 +43,17 @@
         android:id="@+id/textWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:text="@string/hi"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
         android:textColor="@color/black"
         android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textSubHeading"
         app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
 
     <TextView
         android:id="@+id/textSubHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:text="@string/create_a_new_account"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -148,7 +145,7 @@
 
     <dev.sagar.progress_button.ProgressButton
         android:id="@+id/btnUserSignup"
-        style="@style/LoadinButtonStyle"
+        style="@style/LoadingButtonStyle"
         android:layout_width="match_parent"
         android:layout_marginVertical="16dp"
         android:layout_marginStart="16dp"

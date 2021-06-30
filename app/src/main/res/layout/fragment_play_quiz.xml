@@ -6,97 +6,147 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.PlayQuizFragment">
 
-    <TextView
-        android:id="@+id/textQuestionStatement"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:alpha="0"
-        android:text="@string/hello_blank_fragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gradient"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:background="@drawable/bottom_round_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/category_background_1"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textQuestionStatement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:alpha="0"
+                android:textColor="@color/blue_grey_900"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline3"
+                tools:alpha="1"
+                tools:text="@string/hello_blank_fragment" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                tools:checkedButton="@id/radioOption2">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioOption1"
+                    style="@style/CustomRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    tools:alpha="1"
+                    tools:text="Option 1" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioOption2"
+                    style="@style/CustomRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    tools:alpha="1"
+                    tools:text="Option 2" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioOption3"
+                    style="@style/CustomRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    tools:alpha="1"
+                    tools:text="Option 3" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioOption4"
+                    style="@style/CustomRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    tools:alpha="1"
+                    tools:text="Option 4" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnCheckAnswer"
+                style="@style/CustomButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:alpha="0"
+                android:text="@string/check_answer"
+                tools:alpha="1" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.25" />
 
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/optionChipGroup"
-        style="@style/OptionChip"
-        app:selectionRequired="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline4"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipOption1"
-            style="@style/OptionChip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:text="@string/option1" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipOption2"
-            style="@style/OptionChip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:text="@string/option2" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipOption3"
-            style="@style/OptionChip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:text="@string/option3" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipOption4"
-            style="@style/OptionChip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:text="@string/option4" />
-    </com.google.android.material.chip.ChipGroup>
-
-    <Button
-        style="@style/CustomButton"
-        android:id="@+id/btnCheckAnswer"
+    <TextView
+        android:id="@+id/textAnswerStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/check_answer"
-        android:alpha="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optionChipGroup" />
+        android:text="@string/wrong"
+        android:textColor="@color/red_700"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/textRightAnswer"
+        app:layout_constraintStart_toStartOf="@+id/textRightAnswer"
+        tools:visibility="visible" />
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+    <TextView
+        android:id="@+id/textRightAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/blue_grey_900"
+        android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Right Answer: Option A"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

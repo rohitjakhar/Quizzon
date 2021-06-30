@@ -7,7 +7,6 @@ import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +20,9 @@ import com.rohit.quizzon.data.DataStorePreferenceStorage
 import com.rohit.quizzon.databinding.FragmentSignupBinding
 import com.rohit.quizzon.ui.viewmodels.SignUpViewModel
 import com.rohit.quizzon.utils.NetworkResponse
+import com.rohit.quizzon.utils.action
 import com.rohit.quizzon.utils.autoCleaned
-import com.rohit.quizzon.utils.shortToast
+import com.rohit.quizzon.utils.snack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -92,14 +92,21 @@ class SignupFragment : Fragment() {
             signupViewModel.registerState.collectLatest { value ->
                 when (value) {
                     is NetworkResponse.Success -> {
-                        shortToast("We sent verification link to your email")
+                        binding.root.snack("We sent verification link to your email") {
+                            action("Ok") {
+                                findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
+                            }
+                        }
                         findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
                     }
                     is NetworkResponse.Failure -> {
-                        shortToast("Error: ${value.message}")
+                        binding.root.snack("We sent verification link to your email") {
+                            action("Ok") {
+                            }
+                        }
                     }
                     is NetworkResponse.Loading -> {
-                        shortToast("Loading")
+                        // TODO show loading
                     }
                 }
             }

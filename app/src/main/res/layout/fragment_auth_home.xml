@@ -6,7 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.AuthActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/roundCorner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:alpha="0.5"
+            android:background="@drawable/bottom_round_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
+        android:contentDescription="@string/app_name"
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,12 +40,11 @@
         android:id="@+id/textQuizZon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:padding="16dp"
         android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="@color/black"
         android:textSize="32sp"
-        android:padding="16dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -41,9 +60,9 @@
         android:id="@+id/textQuizzonTagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:padding="16dp"
         android:text="@string/quizzon_tag_line"
+        android:textColor="@color/blue_grey_900"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,17 +82,38 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        style="@style/CustomButton"
         android:id="@+id/btnGoToSignUp"
+        style="@style/CustomButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/white"
-        app:strokeColor="@color/green_a700"
-        app:strokeWidth="1dp"
+        android:text="@string/sign_up"
         android:textColor="@color/green_a700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnGoToLogin"
-        app:layout_constraintStart_toStartOf="@+id/btnGoToLogin" />
+        app:layout_constraintStart_toStartOf="@+id/btnGoToLogin"
+        app:strokeColor="@color/green_a700"
+        app:strokeWidth="1dp" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottonRoundCorner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:alpha="0.7"
+            android:background="@drawable/auth_top_round"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

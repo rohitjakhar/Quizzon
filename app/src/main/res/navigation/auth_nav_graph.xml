@@ -47,6 +47,7 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_authHomeFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/scale_down" />
     </fragment>
 </navigation>

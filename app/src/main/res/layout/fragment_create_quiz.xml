@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/enter_quiz_tile"
         android:padding="8dp"
@@ -50,12 +51,12 @@
         android:id="@+id/textQuestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/questions"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/categoryQuiz"
         app:layout_constraintTop_toBottomOf="@id/categoryQuiz" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -65,16 +66,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:padding="8dp"
-        tools:listitem="@layout/create_question_single_row"
+        tools:listitem="@layout/single_create_question"
         app:layout_constraintBottom_toTopOf="@+id/btnSaveQuiz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textQuestions" />
 
     <dev.sagar.progress_button.ProgressButton
-        style="@style/LoadinButtonStyle"
+        style="@style/LoadingButtonStyle"
         android:id="@+id/btnSaveQuiz"
         android:padding="8dp"
+        android:layout_width="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -112,7 +114,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/fabAddQuestion"
         android:src="@drawable/ic_plus"
-        app:backgroundTint="@color/teal_600"
+        app:tint="@color/white"
         android:contentDescription="@string/add_question"
         app:layout_constraintBottom_toTopOf="@id/btnSaveQuiz"
         android:layout_margin="16dp"

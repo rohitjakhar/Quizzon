@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
-import com.rohit.quizzon.databinding.CategorySingleRowBinding
+import com.rohit.quizzon.databinding.SingleCategoryBinding
 import com.rohit.quizzon.utils.listener.CategoryClickListner
 
 class CategoryListViiewHolder(
-    private val binding: CategorySingleRowBinding
+    private val binding: SingleCategoryBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
@@ -25,7 +25,7 @@ class CategoryListViiewHolder(
     companion object {
         fun create(parent: ViewGroup): CategoryListViiewHolder {
             val mView = LayoutInflater.from(parent.context)
-            val binding = CategorySingleRowBinding.inflate(mView, parent, false)
+            val binding = SingleCategoryBinding.inflate(mView, parent, false)
             return CategoryListViiewHolder(binding = binding)
         }
     }

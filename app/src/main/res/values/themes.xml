@@ -15,18 +15,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
-    </style>
-
-    <style name="OptionChip" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="chipStrokeColor">@drawable/chip_stroke</item>
-        <item name="chipStrokeWidth">1dp</item>
-        <item name="chipBackgroundColor">@drawable/chip_background</item>
-        <item name="android:textColor">@drawable/chip_text_color</item>
-        <item name="chipSpacingVertical">16dp</item>
-        <item name="chipMinHeight">48dp</item>
-        <item name="chipStartPadding">8dp</item>
-        <item name="chipEndPadding">8dp</item>
     </style>
 
     <style name="CustomButton" parent="Widget.MaterialComponents.Button">
@@ -40,7 +28,7 @@
         <item name="android:strokeColor">@color/green_a700</item>
     </style>
 
-    <style name="LoadinButtonStyle">
+    <style name="LoadingButtonStyle">
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="corner_radius">@dimen/button_corner_radius</item>
         <item name="android:backgroundTint">@color/green_a700</item>
@@ -50,5 +38,13 @@
         <item name="disabled_color">@color/blue_200</item>
     </style>
 
+    <style name="CustomCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@drawable/category_background_1</item>
+    </style>
 
+    <style name="CustomRadio" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/background_radio</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textColor">@drawable/radio_text_color</item>
+    </style>
 </resources>

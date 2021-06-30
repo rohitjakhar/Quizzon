@@ -4,5 +4,4 @@ data class UserProfileBody(
     val user_id: String,
     val username: String,
     val userEmail: String,
-    val gender: String,
 )

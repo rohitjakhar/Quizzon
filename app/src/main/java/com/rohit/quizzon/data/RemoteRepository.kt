@@ -3,15 +3,21 @@ package com.rohit.quizzon.data
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.rohit.quizzon.BuildConfig
-import com.rohit.quizzon.data.model.body.*
+import com.rohit.quizzon.data.model.body.DataGetBody
+import com.rohit.quizzon.data.model.body.InsertDataBody
+import com.rohit.quizzon.data.model.body.QuestionBody
+import com.rohit.quizzon.data.model.body.UserProfileBody
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
 import com.rohit.quizzon.data.model.response.DataInsertResponse
+import com.rohit.quizzon.data.model.response.DeleteResponseBody
 import com.rohit.quizzon.data.model.response.QuizResponse
 import com.rohit.quizzon.data.model.response.UserProfileResponse
 import com.rohit.quizzon.utils.NetworkResponse
 import com.rohit.quizzon.utils.mapToErrorResponse
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import okhttp3.Credentials
@@ -40,8 +46,7 @@ class RemoteRepository @Inject constructor(
                                 UserProfileBody(
                                     user_id = it.userId,
                                     username = it.username,
-                                    userEmail = it.userEmail,
-                                    gender = "Male"
+                                    userEmail = it.userEmail
                                 )
                             )
                         }
@@ -85,8 +90,7 @@ class RemoteRepository @Inject constructor(
             val userProfileBody = UserProfileBody(
                 user_id = it.uid,
                 username = username,
-                userEmail = email,
-                gender = gender
+                userEmail = email
             )
             val userInsertBody = InsertDataBody(
                 operation = INSERT_OPERATION,
@@ -151,7 +155,7 @@ class RemoteRepository @Inject constructor(
             else -> "$GET_QUIZ_QUERY WHERE category_id = '$category_id'"
         }
         val response =
-            apiCall.fetechQuizes(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+            apiCall.getQuizzes(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
         return if (response.isSuccessful) {
             NetworkResponse.Success(data = response.body(), message = response.message())
         } else {
@@ -189,10 +193,49 @@ class RemoteRepository @Inject constructor(
         } else NetworkResponse.Failure(mapToErrorResponse(response.errorBody()).error)
     }
 
+    suspend fun loadQuizData(quizId: String): NetworkResponse<QuizResponse> {
+        val SQL_QUERY = "$GET_QUIZ_QUERY WHERE quiz_id = '$quizId'"
+        val response =
+            apiCall.getQuizzes(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+        return if (response.isSuccessful) {
+            val quizData = response.body()
+            return if (!quizData.isNullOrEmpty()) {
+                NetworkResponse.Success(data = quizData[0], message = "Added")
+            } else NetworkResponse.Failure("Quiz Not Found!. Please Check Quiz Id")
+        } else {
+            NetworkResponse.Failure(message = mapToErrorResponse(response.errorBody()).error)
+        }
+    }
+
+    suspend fun userQuizList(
+        user_id: String
+    ): NetworkResponse<List<QuizResponse>> {
+        val SQL_QUERY = "$GET_QUIZ_QUERY WHERE create_id = '$user_id'"
+        val response =
+            apiCall.getQuizzes(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+        return if (response.isSuccessful) {
+            NetworkResponse.Success(data = response.body(), message = response.message())
+        } else {
+            NetworkResponse.Failure(mapToErrorResponse(response.errorBody()).error)
+        }
+    }
+
+    suspend fun deleteQuiz(quizId: String): NetworkResponse<DeleteResponseBody> {
+        val SQL_QUERY = "$DELETE_QUIZ_QUERY WHERE quiz_id = '$quizId'"
+        val response =
+            apiCall.deleteQuiz(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+        return if (response.isSuccessful) {
+            NetworkResponse.Success(data = null, message = response.message())
+        } else {
+            NetworkResponse.Failure(mapToErrorResponse(response.errorBody()).error)
+        }
+    }
+
     companion object {
         const val SQL_OPERATION = "sql"
         const val GET_CATEGORY_QUERY = "SELECT * FROM dev.category"
         const val GET_QUIZ_QUERY = "SELECT * FROM dev.quizzes"
+        const val DELETE_QUIZ_QUERY = "DELETE FROM dev.quizzes"
         const val GET_USER_PROFILE_QUERY = "SELECT * FROM dev.user_profile"
         const val INSERT_OPERATION = "insert"
         const val APP_SCHEMA = "dev"

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="8dp"
+    app:cardElevation="8dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        app:layoutDescription="@xml/create_question_single_row_xml_constraintlayout_scene">
+
+        <TextView
+            android:id="@+id/textAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:text="@string/answer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutOption" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutOption"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/imgDeleteItem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textQuestionStatement">
+
+            <TextView
+                android:id="@+id/textOption1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/option1"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textOption2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/option2"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/option3"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textOption4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/option4"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textQuestionIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/textQuestionStatement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/imgDeleteItem"
+            app:layout_constraintStart_toEndOf="@id/textQuestionIndex"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Question Statement" />
+
+        <ImageView
+            android:id="@+id/imgDeleteItem"
+            android:contentDescription="@string/quiz_list"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_delete" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</com.google.android.material.card.MaterialCardView>

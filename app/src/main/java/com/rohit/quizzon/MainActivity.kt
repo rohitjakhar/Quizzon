@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.quizListFragment -> hideBottomBar()
                 R.id.quizFragment -> hideBottomBar()
                 R.id.nav_create_quiz -> hideBottomBar()
+                R.id.resultFragment -> hideBottomBar()
                 else -> showBottomBar()
             }
         }

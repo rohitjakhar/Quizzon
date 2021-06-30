@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rohit.quizzon.data.RemoteRepository
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
+import com.rohit.quizzon.data.model.response.QuizResponse
 import com.rohit.quizzon.utils.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,9 +21,17 @@ class HomeViewModel @Inject constructor(
             NetworkResponse.Loading()
         )
     val categoryList get() = _categoryList
+    private var _quizData: MutableStateFlow<NetworkResponse<QuizResponse>> =
+        MutableStateFlow(NetworkResponse.Loading())
+    val quizData get() = _quizData
+
     fun getCategoryList() {
         viewModelScope.launch {
             _categoryList.value = remoteRepository.categoryList()
         }
+    }
+
+    fun loadQuiz(quidId: String) = viewModelScope.launch {
+        _quizData.value = remoteRepository.loadQuizData(quidId)
     }
 }

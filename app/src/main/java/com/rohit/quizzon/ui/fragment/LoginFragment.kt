@@ -14,8 +14,9 @@ import com.rohit.quizzon.MainActivity
 import com.rohit.quizzon.databinding.FragmentLoginBinding
 import com.rohit.quizzon.ui.viewmodels.LoginViewModel
 import com.rohit.quizzon.utils.NetworkResponse
+import com.rohit.quizzon.utils.action
 import com.rohit.quizzon.utils.autoCleaned
-import com.rohit.quizzon.utils.shortToast
+import com.rohit.quizzon.utils.snack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -101,20 +102,19 @@ class LoginFragment : Fragment() {
             loginViewModel.loginState.collectLatest { value ->
                 when (value) {
                     is NetworkResponse.Success -> {
-                        binding.btnUserLogin.setFinishedText("Log in")
-                        binding.btnUserLogin.enableVibration()
-                        binding.btnUserLogin.finished()
-                        shortToast(value.message!!)
+                        binding.root.snack("Login Success") {
+                        }
                         requireActivity().apply {
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }
                     }
                     is NetworkResponse.Failure -> {
-                        binding.btnUserLogin.setFinishedText("Error: Try Again")
-                        binding.btnUserLogin.finished()
                         binding.btnUserLogin.reset()
-                        shortToast("${value.message}")
+                        binding.root.snack("${value.message}") {
+                            action("Ok") {
+                            }
+                        }
                     }
                     is NetworkResponse.Loading -> {
                         binding.btnUserLogin.activate()

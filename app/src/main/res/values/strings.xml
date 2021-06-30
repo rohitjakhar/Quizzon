@@ -47,8 +47,7 @@
     <string name="all_quiz">All Quiz</string>
     <string name="login_line">Already have an account? Login</string>
     <string name="questions">Questions:</string>
-    <string name="login_sucess">Login Success</string>
-    <string name="login_success">Login Sucess</string>
+    <string name="login_success">Login Success</string>
     <string name="uploaded">Uploaded</string>
     <string name="play_quiz">Play Quiz</string>
     <string name="result">Result</string>
@@ -58,5 +57,15 @@
     <string name="login_to_continue">Login to continue</string>
     <string name="hi">Hi!</string>
     <string name="create_a_new_account">Create a new account</string>
+    <string name="join_a_quiz">Join a Quiz</string>
+    <string name="enter_quiz_id">Enter Quiz Id</string>
+    <string name="quiz_list">Quiz List</string>
+    <string name="no_quiz_created">No Quiz Created</string>
+    <string name="retry">Retry</string>
+    <string name="delete">delete</string>
+    <string name="back_home">Back Home</string>
+    <string name="wrong">Wrong</string>
+    <string name="don_t_worry_we_will_help_you">Don\'t worry we will help you!</string>
+    <string name="quiz_created">Quiz Created:-</string>
 
 </resources>
