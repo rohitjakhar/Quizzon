@@ -3,7 +3,6 @@ package com.rohit.quizzon.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rohit.quizzon.data.RemoteRepository
-import com.rohit.quizzon.data.model.body.User
 import com.rohit.quizzon.data.model.response.DataInsertResponse
 import com.rohit.quizzon.utils.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,8 +28,7 @@ class SignUpViewModel @Inject constructor(
             remoteRepository.registerUser(
                 username = username,
                 email = userEmail,
-                password = userPassword,
-                gender = "Male"
+                password = userPassword
             ).collect { status ->
                 _registerState.value = status
             }

@@ -1,6 +1,5 @@
 package com.rohit.quizzon.data
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.rohit.quizzon.BuildConfig
 import com.rohit.quizzon.data.model.body.DataGetBody
@@ -79,13 +78,11 @@ class RemoteRepository @Inject constructor(
     suspend fun registerUser(
         email: String,
         username: String,
-        password: String,
-        gender: String
+        password: String
     ) = flow<NetworkResponse<DataInsertResponse>> {
         emit(NetworkResponse.Loading())
         val response = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
         response.user?.let {
-            Log.d("userImage", it.photoUrl.toString())
             it.sendEmailVerification()
             val userProfileBody = UserProfileBody(
                 user_id = it.uid,

@@ -42,29 +42,26 @@ class SignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSignupBinding.inflate(inflater, container, false)
+        initSpannableString()
+        initClickListener()
+        initView()
+        return binding.root
+    }
 
-        val signupText = resources.getString(R.string.login_line)
-        val spanableString = SpannableStringBuilder(signupText)
+    private fun initView() = binding.apply {
+        btnUserSignup.setDisableViews(
+            listOf(
+                userNameInputLayout,
+                userConfirmPasswordInputLayout,
+                userPasswordInputLayout,
+                userEmailInputLayout,
+                textLogin,
+                fabBackButton
+            )
+        )
+    }
 
-        val signUpClick = object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
-            }
-        }
-        spanableString.setSpan(
-            signUpClick,
-            25,
-            (signupText.length),
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        spanableString.setSpan(
-            object : ForegroundColorSpan(Color.parseColor("#00AB5C")) {},
-            25,
-            (signupText.length),
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        binding.textLogin.movementMethod = LinkMovementMethod.getInstance()
-        binding.textLogin.setText(spanableString, TextView.BufferType.SPANNABLE)
+    private fun initClickListener() {
         binding.btnUserSignup.setOnClickListener {
             val userName = binding.userNameInputLayout.editText?.text.toString().trim()
             val userEmail = binding.userEmailInputLayout.editText?.text.toString().trim()
@@ -77,14 +74,40 @@ class SignupFragment : Fragment() {
                     password,
                     confirmPassword
                 )
-            ) signupViewModel.registerUser(
-                username = userName,
-                userEmail = userEmail,
-                userPassword = password
-            )
-            checkStatus()
+            ) {
+                binding.btnUserSignup.activate()
+                signupViewModel.registerUser(
+                    username = userName,
+                    userEmail = userEmail,
+                    userPassword = password
+                )
+                checkStatus()
+            } else return@setOnClickListener
         }
-        return binding.root
+    }
+
+    private fun initSpannableString() {
+        val signupText = resources.getString(R.string.login_line)
+        val spannableStringBuilder = SpannableStringBuilder(signupText)
+        val signUpClick = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
+            }
+        }
+        spannableStringBuilder.setSpan(
+            signUpClick,
+            25,
+            (signupText.length),
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableStringBuilder.setSpan(
+            object : ForegroundColorSpan(Color.parseColor("#00AB5C")) {},
+            25,
+            (signupText.length),
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        binding.textLogin.movementMethod = LinkMovementMethod.getInstance()
+        binding.textLogin.setText(spannableStringBuilder, TextView.BufferType.SPANNABLE)
     }
 
     private fun checkStatus() {
@@ -92,6 +115,7 @@ class SignupFragment : Fragment() {
             signupViewModel.registerState.collectLatest { value ->
                 when (value) {
                     is NetworkResponse.Success -> {
+                        binding.btnUserSignup.finished()
                         binding.root.snack("We sent verification link to your email") {
                             action("Ok") {
                                 findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
@@ -100,13 +124,14 @@ class SignupFragment : Fragment() {
                         findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
                     }
                     is NetworkResponse.Failure -> {
-                        binding.root.snack("We sent verification link to your email") {
+                        binding.btnUserSignup.reset()
+                        binding.root.snack("${value.message}") {
                             action("Ok") {
                             }
                         }
                     }
                     is NetworkResponse.Loading -> {
-                        // TODO show loading
+                        binding.btnUserSignup.activate()
                     }
                 }
             }

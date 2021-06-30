@@ -28,7 +28,6 @@ class PlayQuizFragment : Fragment() {
     private var rightAnswer = 0
     private var wrongAnswer = 0
     private lateinit var quizData: QuizResponse
-    private var selectedOptionText = ""
     private var isCheckedAnswer = false
 
     @SuppressLint("SetTextI18n")
@@ -113,42 +112,13 @@ class PlayQuizFragment : Fragment() {
     private fun updateView() {
         loadQuestionAnimation()
         binding.apply {
+            textQuizTitle.text = quizData.quizTitle
             textQuestionStatement.text = quizData.questionList[currentPosition].questionStatement
             radioOption1.text = quizData.questionList[currentPosition].option1
             radioOption2.text = quizData.questionList[currentPosition].option2
             radioOption3.text = quizData.questionList[currentPosition].option3
             radioOption4.text = quizData.questionList[currentPosition].option4
         }
-//        binding.apply {
-//            optionChipGroup.clearCheck()
-//            textQuestionStatement.text = quizData.questionList[currentPosition].questionStatement
-//            chipOption1.text = quizData.questionList[currentPosition].option1
-//            chipOption2.text = quizData.questionList[currentPosition].option2
-//            chipOption3.text = quizData.questionList[currentPosition].option3
-//            chipOption4.text = quizData.questionList[currentPosition].option4
-//            optionChipGroup.clearCheck()
-//        }
-    }
-
-    private fun finishQuestionAnimation() = binding.apply {
-        radioOption1.animate()
-            .alpha(0f)
-            .duration = 400L
-        radioOption2.animate()
-            .alpha(0f)
-            .duration = 400L
-        radioOption3.animate()
-            .alpha(0f)
-            .duration = 400L
-        radioOption4.animate()
-            .alpha(0f)
-            .duration = 400L
-        btnCheckAnswer.animate()
-            .alpha(0f)
-            .duration = 400L
-        textQuestionStatement.animate()
-            .alpha(0f)
-            .duration = 400L
     }
 
     private fun loadQuestionAnimation() = binding.apply {
