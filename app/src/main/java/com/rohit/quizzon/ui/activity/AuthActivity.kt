@@ -22,19 +22,12 @@ class AuthActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val navHostFragment: NavHostFragment =
-            supportFragmentManager.findFragmentById(binding.authFragmentContainer.id) as NavHostFragment
-
-        val navController = navHostFragment.navController
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.loginFragment,
                 R.id.signupFragment
             )
         )
-        // setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {

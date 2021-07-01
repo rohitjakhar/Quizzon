@@ -25,11 +25,11 @@ class UserQuizViewHolder(
         imgDeleteItem.setOnClickListener {
             MaterialAlertDialogBuilder(binding.root.context)
                 .setTitle("Delete Quiz")
-                .setPositiveButton("Delete") { dialog, which ->
+                .setPositiveButton("Delete") { dialog, _ ->
                     quizClickListener.quizClickListener(quizResponse)
                     dialog.dismiss()
                 }
-                .setNeutralButton("Cancel") { dialog, which ->
+                .setNeutralButton("Cancel") { dialog, _ ->
                     dialog.dismiss()
                 }
                 .show()

@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.home_container_view) as NavHostFragment
         val navController = fragmentManager.navController
 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.quizListFragment -> hideBottomBar()
                 R.id.quizFragment -> hideBottomBar()

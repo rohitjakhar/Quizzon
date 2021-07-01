@@ -176,6 +176,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnUserLogout"
         style="@style/CustomButton"
+        android:backgroundTint="#ff4e50"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

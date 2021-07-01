@@ -100,7 +100,7 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
 
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         (binding.categoryQuiz.editText as? AutoCompleteTextView)?.setAdapter(categoryAdapter)
-        (binding.categoryQuiz.editText as? AutoCompleteTextView)?.setOnItemClickListener { parent, view, position, id ->
+        (binding.categoryQuiz.editText as? AutoCompleteTextView)?.setOnItemClickListener { parent, _, position, _ ->
             val tet = parent.getItemAtPosition(position) as CategoryResponseItem
             selectedCategory = tet
         }
@@ -197,7 +197,7 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
 
     private fun validateInputs(): Boolean {
         return when {
-            createQuestionAdapter.itemCount < 1 -> {
+            createQuestionAdapter.itemCount < 5 -> {
                 shortToast("Please Add 5 Question at least")
                 false
             }
