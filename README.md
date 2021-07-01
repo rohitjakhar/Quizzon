@@ -27,20 +27,6 @@ Clone the repository on your machine. Open the project on your IDE and connect i
 
 ![QuizZon.gif](media/QuizZon.gif)
 
-
-**QuizZon** supports both email based and Social media authentication like Google authentication. Planning to add Facebook authentication too. 😁
-
-
-
-![1.png](media/slide-2.png)
-
-
-Have a look at your running task, upcoming and completed tasks all in one place. Create a task by pressing the FAB below.
-
-![2.png](media/slide-3.png)
-
-QuizZon lets you start a timer ⌚ to track the time you take completing a task. Timer runs in background, so you dont need to keep the app open all the time. 👍 See stats 💪 of all tasks you created within the last week, including total tasks created in a day and breakdown of tasks based on category.
-
 ## 📸 Screenshots
 
 ||||
