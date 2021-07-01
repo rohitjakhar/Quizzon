@@ -4,9 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.rohit.quizzon.MainActivity
-import com.rohit.quizzon.data.DataStorePreferenceStorage
+import com.rohit.quizzon.data.local.DataStorePreferenceStorage
 import com.rohit.quizzon.databinding.ActivitySplashScrenBinding
+import com.rohit.quizzon.ui.activity.AuthActivity
+import com.rohit.quizzon.ui.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

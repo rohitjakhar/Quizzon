@@ -60,7 +60,6 @@ class QuizAllFragment : Fragment(), QuizClickListener {
                         stopShimmer()
                     }
                     is NetworkResponse.Loading -> {
-                        // Todo show loading process 
                         startShimmer()
                     }
                 }

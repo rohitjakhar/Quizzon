@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -121,9 +120,11 @@ class HomeFragment : Fragment(), CategoryClickListner {
     }
 
     override fun onCategoryListner(category_id: String) {
-        Toast.makeText(requireContext(), "Clicked on $category_id", Toast.LENGTH_LONG).show()
-        val ac = HomeFragmentDirections.actionNavHomeToQuizListFragment(category_id)
-        findNavController().navigate(ac)
+        findNavController().navigate(
+            HomeFragmentDirections.actionNavHomeToQuizListFragment(
+                category_id
+            )
+        )
     }
 
     private fun startShimmer() {

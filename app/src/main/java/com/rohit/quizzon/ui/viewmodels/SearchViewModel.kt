@@ -2,8 +2,8 @@ package com.rohit.quizzon.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rohit.quizzon.data.RemoteRepository
 import com.rohit.quizzon.data.model.response.QuizResponse
+import com.rohit.quizzon.data.remote.RemoteRepository
 import com.rohit.quizzon.utils.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

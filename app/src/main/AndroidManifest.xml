@@ -24,12 +24,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.AuthActivity"
+            android:name=".ui.activity.AuthActivity"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:windowSoftInputMode="adjustResize" />
 
         <meta-data

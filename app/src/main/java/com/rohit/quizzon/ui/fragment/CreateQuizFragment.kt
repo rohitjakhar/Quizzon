@@ -89,7 +89,6 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
                         findNavController().navigateUp()
                     }
                     is NetworkResponse.Loading -> {
-                        // TODO show progress bar
                     }
                 }
             }

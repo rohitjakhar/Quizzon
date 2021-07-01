@@ -14,8 +14,8 @@ import com.rohit.quizzon.databinding.FragmentSearchBinding
 import com.rohit.quizzon.ui.adapter.QuizAdapter
 import com.rohit.quizzon.ui.viewmodels.SearchViewModel
 import com.rohit.quizzon.utils.NetworkResponse
-import com.rohit.quizzon.utils.listener.QuizClickListener
 import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.listener.QuizClickListener
 import com.rohit.quizzon.utils.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -61,7 +61,6 @@ class SearchFragment : Fragment(), QuizClickListener {
                     }
                     is NetworkResponse.Loading -> {
                         startShimmer()
-                        // Todo show loading process 
                     }
                 }
             }

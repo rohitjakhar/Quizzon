@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.rohit.quizzon.MainActivity
 import com.rohit.quizzon.databinding.FragmentLoginBinding
+import com.rohit.quizzon.ui.activity.MainActivity
 import com.rohit.quizzon.ui.viewmodels.LoginViewModel
 import com.rohit.quizzon.utils.NetworkResponse
 import com.rohit.quizzon.utils.action
@@ -35,26 +35,21 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-
         initViewForProgress()
         initClickListener()
-
-        binding.textForgetPassword.setOnClickListener {
-            val ac = LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment()
-            findNavController().navigate(ac)
-        }
-        binding.textRegisterAccount.setOnClickListener {
-            val loginToSignup = LoginFragmentDirections.actionLoginFragmentToSignupFragment()
-            findNavController().navigate(loginToSignup)
-        }
-
-        binding.fabBackButton.setOnClickListener {
-            findNavController().navigateUp()
-        }
         return binding.root
     }
 
     private fun initClickListener() = binding.apply {
+        textForgetPassword.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment())
+        }
+        textRegisterAccount.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
+        }
+        imgBackArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
         btnUserLogin.setOnClickListener {
             val email = binding.userEmailInputLayout.editText?.text.toString().trim()
             val password = binding.userPasswordInputLayout.editText?.text.toString().trim()
@@ -74,7 +69,7 @@ class LoginFragment : Fragment() {
                     userPasswordInputLayout,
                     textForgetPassword,
                     textRegisterAccount,
-                    fabBackButton
+                    imgBackArrow
                 )
             )
         }

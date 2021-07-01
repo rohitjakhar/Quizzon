@@ -16,7 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.rohit.quizzon.R
-import com.rohit.quizzon.data.DataStorePreferenceStorage
+import com.rohit.quizzon.data.local.DataStorePreferenceStorage
 import com.rohit.quizzon.databinding.FragmentSignupBinding
 import com.rohit.quizzon.ui.viewmodels.SignUpViewModel
 import com.rohit.quizzon.utils.NetworkResponse
@@ -56,13 +56,16 @@ class SignupFragment : Fragment() {
                 userPasswordInputLayout,
                 userEmailInputLayout,
                 textLogin,
-                fabBackButton
+                imgBackArrow
             )
         )
     }
 
-    private fun initClickListener() {
-        binding.btnUserSignup.setOnClickListener {
+    private fun initClickListener() = binding.apply {
+        imgBackArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        btnUserSignup.setOnClickListener {
             val userName = binding.userNameInputLayout.editText?.text.toString().trim()
             val userEmail = binding.userEmailInputLayout.editText?.text.toString().trim()
             val password = binding.userPasswordInputLayout.editText?.text.toString().trim()

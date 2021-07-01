@@ -9,10 +9,10 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.rohit.quizzon.data.DataStorePreferenceStorage
-import com.rohit.quizzon.data.DataStorePreferenceStorage.Companion.PREFS_NAME
-import com.rohit.quizzon.data.QuizService
-import com.rohit.quizzon.data.RemoteRepository
+import com.rohit.quizzon.data.local.DataStorePreferenceStorage
+import com.rohit.quizzon.data.local.DataStorePreferenceStorage.Companion.PREFS_NAME
+import com.rohit.quizzon.data.remote.QuizService
+import com.rohit.quizzon.data.remote.RemoteRepository
 import com.rohit.quizzon.utils.Config.Companion.BASE_URL
 import com.rohit.quizzon.utils.PreferenceDataStore
 import dagger.Module
