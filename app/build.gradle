@@ -12,9 +12,9 @@ android {
     signingConfigs {
         release {
         storeFile file('/home/rohit/Documents/Quizzon/quizzonkey.jks')
-            storePassword storePassword
-            keyAlias keyAlias
-            keyPassword keyPassword
+            storePassword 'your-store-password'
+            keyAlias 'key'
+            keyPassword 'keypassword'
         }
     }
     compileSdkVersion 30
