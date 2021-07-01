@@ -25,7 +25,7 @@ Clone the repository on your machine. Open the project on your IDE and connect i
 
 ### Insights into the app 🔎
 
-![QuizZon.gif](media/QuizZon.gif)
+![QuizZon.gif](https://raw.githubusercontent.com/rohitjakhar/Quizzon/0b7e611653fd3d6b9f8aaa6657025f4c6d20667f/media/Quizzon.gif?token=AIPBJFJQMRV5MFOAU5LVEH3A4ZL4A)
 
 
 **QuizZon** supports both email based and Social media authentication like Google authentication. Planning to add Facebook authentication too. 😁
