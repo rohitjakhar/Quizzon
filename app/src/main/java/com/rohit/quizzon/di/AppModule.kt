@@ -11,6 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.rohit.quizzon.data.local.DataStorePreferenceStorage
 import com.rohit.quizzon.data.local.DataStorePreferenceStorage.Companion.PREFS_NAME
+import com.rohit.quizzon.data.remote.BasicAuthInterceptor
 import com.rohit.quizzon.data.remote.QuizService
 import com.rohit.quizzon.data.remote.RemoteRepository
 import com.rohit.quizzon.utils.Config.Companion.BASE_URL
@@ -44,6 +45,10 @@ object AppModule {
         }
     }
 
+    @Singleton
+    @Provides
+    fun provideBasicAuth() = BasicAuthInterceptor()
+
     @Provides
     @Singleton
     fun providesFirebaseAuth() = Firebase.auth
@@ -51,9 +56,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttp(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        basicAuthInterceptor: BasicAuthInterceptor
     ): Call.Factory {
         return OkHttpClient.Builder()
+            .addInterceptor(basicAuthInterceptor)
             .addInterceptor(loggingInterceptor)
             .callTimeout(300, TimeUnit.SECONDS)
             .build()

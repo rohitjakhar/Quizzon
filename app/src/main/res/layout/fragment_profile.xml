@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.fragment.ProfileFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/roundCorner"
@@ -108,18 +109,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvUserInfo" />
 
-    <TextView
-        android:id="@+id/textEmptyData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_quiz_created"
-        android:textColor="@color/black_500"
-        android:textSize="24sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textQuizList"
-        tools:listitem="@layout/single_create_question" />
+        <TextView
+            android:id="@+id/textEmptyData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/no_quiz_created"
+            android:textColor="@color/black_500"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btnUserLogout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textQuizList"
+            tools:listitem="@layout/single_create_question"
+            tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnRetryButton"
@@ -171,9 +175,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        tools:itemCount="10"
-        tools:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnUserLogout"
+        tools:itemCount="1"
+        tools:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textQuizList"
@@ -188,7 +191,7 @@
         android:layout_margin="8dp"
         android:padding="8dp"
         android:text="@string/logout"
-        app:layout_constraintTop_toBottomOf="@+id/rvUserQuizzes"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

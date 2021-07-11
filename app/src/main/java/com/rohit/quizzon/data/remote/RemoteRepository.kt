@@ -1,7 +1,6 @@
 package com.rohit.quizzon.data.remote
 
 import com.google.firebase.auth.FirebaseAuth
-import com.rohit.quizzon.BuildConfig
 import com.rohit.quizzon.data.local.DataStorePreferenceStorage
 import com.rohit.quizzon.data.model.body.DataGetBody
 import com.rohit.quizzon.data.model.body.InsertDataBody
@@ -20,7 +19,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import okhttp3.Credentials
 import javax.inject.Inject
 
 class RemoteRepository @Inject constructor(
@@ -28,11 +26,6 @@ class RemoteRepository @Inject constructor(
     private val dataStorePreferenceStorage: DataStorePreferenceStorage,
     private val firebaseAuth: FirebaseAuth
 ) {
-    private val cred = Credentials.basic(
-        username = BuildConfig.USERNAME,
-        password = BuildConfig.PASSWORD
-    )
-
     suspend fun loginUser(email: String, password: String) =
         flow<NetworkResponse<UserProfileResponse>> {
             emit(NetworkResponse.Loading())
@@ -116,7 +109,7 @@ class RemoteRepository @Inject constructor(
     }
 
     private suspend fun saveUserProfileToHarper(user: InsertDataBody): NetworkResponse<DataInsertResponse> {
-        val response = apiCall.saveUserData(token = cred, user = user)
+        val response = apiCall.saveUserData(user = user)
         return try {
             if (response.isSuccessful) NetworkResponse.Success(
                 data = response.body(),
@@ -131,7 +124,6 @@ class RemoteRepository @Inject constructor(
 
     private suspend fun getUserProfileFromHarper(userId: String): NetworkResponse<UserProfileResponse> {
         val response = apiCall.getUserProfile(
-            token = cred,
             DataGetBody(
                 operation = SQL_OPERATION,
                 sql = "$GET_USER_PROFILE_QUERY WHERE user_id = '$userId'"
@@ -153,7 +145,7 @@ class RemoteRepository @Inject constructor(
             else -> "$GET_QUIZ_QUERY WHERE category_id = '$category_id'"
         }
         val response =
-            apiCall.getQuizzes(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+            apiCall.getQuizzes(DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
         return if (response.isSuccessful) {
             NetworkResponse.Success(data = response.body(), message = response.message())
         } else {
@@ -163,7 +155,6 @@ class RemoteRepository @Inject constructor(
 
     suspend fun categoryList(): NetworkResponse<List<CategoryResponseItem>> {
         val response = apiCall.getCategory(
-            cred,
             DataGetBody(
                 operation = SQL_OPERATION,
                 sql = GET_CATEGORY_QUERY
@@ -178,7 +169,6 @@ class RemoteRepository @Inject constructor(
 
     suspend fun uploadQuiz(questionBody: QuestionBody): NetworkResponse<DataInsertResponse> {
         val response = apiCall.createQuiz(
-            token = cred,
             quizBody = InsertDataBody(
                 operation = INSERT_OPERATION,
                 schema = APP_SCHEMA,
@@ -194,7 +184,7 @@ class RemoteRepository @Inject constructor(
     suspend fun loadQuizData(quizId: String): NetworkResponse<QuizResponse> {
         val SQL_QUERY = "$GET_QUIZ_QUERY WHERE quiz_id = '$quizId'"
         val response =
-            apiCall.getQuizzes(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+            apiCall.getQuizzes(DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
         return if (response.isSuccessful) {
             val quizData = response.body()
             return if (!quizData.isNullOrEmpty()) {
@@ -210,7 +200,7 @@ class RemoteRepository @Inject constructor(
     ): NetworkResponse<List<QuizResponse>> {
         val SQL_QUERY = "$GET_QUIZ_QUERY WHERE create_id = '$user_id'"
         val response =
-            apiCall.getQuizzes(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+            apiCall.getQuizzes(DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
         return if (response.isSuccessful) {
             NetworkResponse.Success(data = response.body(), message = response.message())
         } else {
@@ -221,7 +211,7 @@ class RemoteRepository @Inject constructor(
     suspend fun deleteQuiz(quizId: String): NetworkResponse<DeleteResponseBody> {
         val SQL_QUERY = "$DELETE_QUIZ_QUERY WHERE quiz_id = '$quizId'"
         val response =
-            apiCall.deleteQuiz(cred, DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
+            apiCall.deleteQuiz(DataGetBody(operation = SQL_OPERATION, sql = SQL_QUERY))
         return if (response.isSuccessful) {
             NetworkResponse.Success(data = null, message = response.message())
         } else {

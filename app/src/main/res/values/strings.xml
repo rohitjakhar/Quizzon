@@ -27,7 +27,7 @@
 
     <string name="about_app">Quizzon is app where you can create your own quizzes and share with your contact and also can play many quiz free.</string>
     <string name="about_developer">Rohit Jakhar created this project during Harperdb hackathon with MIT open source Licence</string>
-    <string name="about_harper">Harper db is new technology for handing data in cloude data base</string>
+    <string name="about_harper">Harper db is new technology for handing data in cloud data base</string>
 
     <string name="developer">About Developer</string>
     <string name="harperdb">About HarperDB</string>

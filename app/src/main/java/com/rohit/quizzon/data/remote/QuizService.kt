@@ -16,37 +16,31 @@ interface QuizService {
 
     @POST("/")
     suspend fun getQuizzes(
-        @Header("Authorization") token: String,
         @Body getQuizBody: DataGetBody
     ): Response<List<QuizResponse>>
 
     @POST("/")
     suspend fun deleteQuiz(
-        @Header("Authorization") token: String,
         @Body getQuizBody: DataGetBody
     ): Response<DeleteResponseBody>
 
     @POST("/")
     suspend fun saveUserData(
-        @Header("Authorization") token: String,
         @Body user: InsertDataBody
     ): Response<DataInsertResponse>
 
     @POST("/")
     suspend fun getCategory(
-        @Header("Authorization") token: String,
         @Body categoryBody: DataGetBody
     ): Response<List<CategoryResponseItem>>
 
     @POST("/")
     suspend fun getUserProfile(
-        @Header("Authorization") token: String,
         @Body categoryBody: DataGetBody
     ): Response<List<UserProfileResponse>>
 
     @POST("/")
     suspend fun createQuiz(
-        @Header("Authorization") token: String,
         @Body quizBody: InsertDataBody
     ): Response<DataInsertResponse>
 }
