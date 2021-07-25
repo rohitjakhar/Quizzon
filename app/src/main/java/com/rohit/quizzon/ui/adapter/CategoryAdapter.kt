@@ -8,7 +8,7 @@ import com.rohit.quizzon.ui.viewholder.CategoryListViiewHolder
 import com.rohit.quizzon.utils.listener.CategoryClickListner
 
 class CategoryAdapter(
-    private val categoryClickListner: CategoryClickListner
+    private val categoryClickListener: CategoryClickListner
 ) :
     ListAdapter<CategoryResponseItem, CategoryListViiewHolder>(CategoryItemDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryListViiewHolder {
@@ -17,7 +17,7 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: CategoryListViiewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it, categoryClickListner = categoryClickListner)
+            holder.bind(it, categoryClickListener = categoryClickListener)
         }
     }
 

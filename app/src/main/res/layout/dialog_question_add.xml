@@ -46,7 +46,7 @@
                     style="@style/CustomInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/option1"
+                    android:hint="@string/option_label"
                     android:padding="8dp">
 
                     <com.google.android.material.textfield.TextInputEditText

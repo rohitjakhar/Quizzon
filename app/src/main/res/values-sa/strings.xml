@@ -1,0 +1,81 @@
+
+<resources>
+    <string name="app_name">Quizzon</string>
+    <string name="sign_up">पञ्जीकरणम्</string>
+    <string name="enter_your_password">कूटपदम्</string>
+    <string name="enter_your_email">ई-पत्रम्</string>
+    <string name="enter_your_name">नाम</string>
+    <string name="login">सम्प्रवेशः</string>
+    <string name="if_you_don_t_have_account_register_here">यदि अकाउण्टं न अस्ति, तर्हि पञ्जीकरणं करोतु</string>
+    <string name="home">मुखपृष्ठ</string>
+    <string name="search">अन्वेषण</string>
+    <string name="profile">व्यक्तिविवरण</string>
+    <string name="about">प्रति</string>
+    <string name="add_question">प्रश्न-समायोजनम् </string>
+    <string name="enter_quiz_tile"> शीर्षक</string>
+    <string name="write_question">लिखितप्रश्नाः</string>
+    <string name="add">समायोजनम्</string>
+    <string name="cancel">निरस्तः </string>
+
+    <string name="option_label">विकल्पः %d %s</string>
+
+    <string name="answer_label">उत्तर %s</string>
+    <string name="option1">विकल्पः १</string>
+    <string name="option2">विकल्पः २</string>
+    <string name="option3">विकल्पः ३</string>
+    <string name="option4">विकल्पः ४</string>
+    <string name="save">रक्षतु</string>
+    <string name="choose_category">वर्गं चिनुत</string>
+    <string name="correct_option">उचितविकल्पः </string>
+
+    <style name="all_quizzes">समस्तप्र्श्नमञ्चाः</style>
+
+    <string name="about_app"> Quizzon दूरवाणी मध्ये एकं अनुप्रयोगतन्त्रांशः (app) अस्ति यत्र भवान् पृथक् पृथक्, स्वस्य प्रश्न-मञ्चस्य निर्माणं कर्तुं शक्नोति पुनश्च भवतः सम्पर्क जनां दातुं(share) शक्नोति, विनामुल्ये क्रीडितुं शक्नोति च</string>
+    <string name="about_developer">रोहितः जाखर इयं परियोजनां MIT मुक्तप्रभवआज्ञापत्रस्य उपयोगं कृत्वा, Harperdb hackathon स्पर्धाकाले रचितवान् </string>
+    <string name="about_harper">HarperDb इति नूतनः तन्त्रविज्ञानः, दत्तांश-आदाय दत्तसंग्रहित-मेघः मध्ये</string>
+
+    <string name="developer">निर्मातविषये</string>
+    <string name="harperdb">HarperDB विषये</string>
+    <string name="github">Github लिंगक</string>
+    <string name="linkedIn">LinkedIn लिंगक</string>
+    <string name="twitter">ट्विटरः</string>
+    <string name="logout">निस्कासनम्</string>
+    <string name="confirm_password">कूटपदं द्र्ढय</string>
+    <string name="send_email">ईपत्रप्रेषणम</string>
+    <string name="forget_password">कूतपदःविस्मृतः</string>
+    <string name="quizzon_tag_line">असीम-प्रश्नमञ्चानां निर्माणं अथवा आरम्भं करोतु</string>
+    <string name="create_quiz">प्रश्नमञ्चनिर्माणम्</string>
+    <string name="join_quiz">रसप्रश्नं प्रवेश</string>
+    <string name="check_answer">उत्तरस्य जांच कुरू</string>
+    <string name="answer">उत्तर</string>
+    <string name="all_quiz">सर्वाणि प्रश्नोत्तरस्य परीक्षाः</string>
+<!--    Already have an account -->
+    <string name="login_line">सम्प्रविशतु</string>
+    <string name="questions">प्रश्नाः</string>
+    <string name="login_success">सफलः सम्प्रवेशः</string>
+    <string name="uploaded">उपारोपण</string>
+    <string name="play_quiz">प्रश्नोत्तर परीक्षा आरम्भं करोतु</string>
+    <string name="result">परिणाम</string>
+    <string name="start">आरम्भं करोति </string>
+    <string name="back">प्रतिगच्छति</string>
+    <string name="welcome_back">पुनः स्वागतम्</string>
+    <string name="login_to_continue">प्रारब्धुं सम्प्रवेश करोतु</string>
+    <string name="hi">नमस्कारः</string>
+    <string name="create_a_new_account">नवीनं पञ्जीकरणम्</string>
+    <string name="join_a_quiz"> प्रश्न-मञ्चे आगच्छतु</string>
+    <string name="enter_quiz_id">Enter Quiz Id</string>
+    <string name="quiz_list">प्रश्नोत्तरस्य परीक्षाः सूची</string>
+    <string name="no_quiz_created">No Quiz Created</string>
+    <string name="retry">पुनः प्रयासं कुरू</string>
+    <string name="delete">लुपयति</string>
+    <string name="back_home">प्रतिगच्छति</string>
+    <string name="wrong">दोषपूर्ण</string>
+    <string name="don_t_worry_we_will_help_you">चिंतामास्तु वयं सहायता करिष्यामः</string>
+    <string name="quiz_created">प्रश्न-मञ्च: रचितः-</string>
+    <string name="english">आङ्ग्लभाषा</string>
+    <string name="sanskrit">संस्कृत</string>
+    <string name="choose_language">भाषा चिनुत</string>
+    <string name="total_question">सकल प्रश्न: %s</string>
+    <string name="category_name">वर्गं : %s</string>
+    <string name="created_by">निर्मातृ : %s</string>
+</resources>

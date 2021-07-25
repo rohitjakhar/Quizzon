@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rohit.quizzon">
+        package="com.rohit.quizzon">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -8,15 +8,16 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name=".MyApp"
-        android:allowBackup="true"
-        android:fullBackupContent="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:largeHeap="true"
-        android:theme="@style/Theme.Quizzon">
+            android:name=".MyApp"
+            android:allowBackup="true"
+            android:fullBackupContent="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:largeHeap="true"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.Quizzon">
+        <activity android:name=".ui.activity.LanguageSelectActivity"></activity>
         <activity android:name=".ui.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,17 +26,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.AuthActivity"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
+                android:name=".ui.activity.AuthActivity"
+                android:windowSoftInputMode="adjustResize"></activity>
         <activity
-            android:name=".ui.activity.MainActivity"
-            android:windowSoftInputMode="adjustResize" />
+                android:name=".ui.activity.MainActivity"
+                android:windowSoftInputMode="adjustResize" />
 
         <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+                android:name="preloaded_fonts"
+                android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

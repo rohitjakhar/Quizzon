@@ -62,7 +62,9 @@ object AppModule {
         return OkHttpClient.Builder()
             .addInterceptor(basicAuthInterceptor)
             .addInterceptor(loggingInterceptor)
-            .callTimeout(300, TimeUnit.SECONDS)
+            .callTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
             .build()
     }
 

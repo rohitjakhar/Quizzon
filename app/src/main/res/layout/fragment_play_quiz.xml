@@ -90,8 +90,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline3"
-                    tools:alpha="1"
-                    tools:text="@string/hello_blank_fragment" />
+                    tools:alpha="1"/>
 
                 <RadioGroup
                     android:id="@+id/radioGroupOption"

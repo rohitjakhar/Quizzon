@@ -5,6 +5,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.rohit.quizzon.data.model.body.UserProfileBody
 import com.rohit.quizzon.utils.PreferenceDataStore
+import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_CHANGE_LANGUAGE
+import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_FIRST_TIME
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_LOGGED_IN
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_ID
 import com.rohit.quizzon.utils.PreferenceDataStore.PreferenceKey.PREF_USER_NAME
@@ -35,6 +37,12 @@ class DataStorePreferenceStorage @Inject constructor(
             )
         }
 
+    override val languageSelected: Flow<String>
+        get() = dataStore.data.map { it[PREF_CHANGE_LANGUAGE] ?: "en" }
+
+    override val isFirstTime: Flow<Boolean>
+        get() = dataStore.data.map { it[PREF_FIRST_TIME] ?: false }
+
     override suspend fun saveUserData(user: UserProfileBody) {
         dataStore.edit { mutablePreferences ->
             mutablePreferences[PREF_USER_NAME] = user.username
@@ -46,6 +54,18 @@ class DataStorePreferenceStorage @Inject constructor(
     override suspend fun isLogin(isLogin: Boolean) {
         dataStore.edit { mutablePreferences ->
             mutablePreferences[PREF_LOGGED_IN] = isLogin
+        }
+    }
+
+    override suspend fun changeLanguage(language: String) {
+        dataStore.edit { mutablePreferences ->
+            mutablePreferences[PREF_CHANGE_LANGUAGE] = language
+        }
+    }
+
+    override suspend fun firstTime(isFirstTime: Boolean) {
+        dataStore.edit { mutablePreferences ->
+            mutablePreferences[PREF_FIRST_TIME] = isFirstTime
         }
     }
 

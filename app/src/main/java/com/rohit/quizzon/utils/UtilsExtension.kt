@@ -1,5 +1,6 @@
 package com.rohit.quizzon.utils
 
+import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -7,6 +8,10 @@ import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.shortToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.shortToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
 inline fun View.snack(message: String, length: Int = Snackbar.LENGTH_LONG, f: Snackbar.() -> Unit) {

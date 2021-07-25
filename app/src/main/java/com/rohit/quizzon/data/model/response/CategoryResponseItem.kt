@@ -1,9 +1,12 @@
 package com.rohit.quizzon.data.model.response
+
 import com.google.gson.annotations.SerializedName
 
 data class CategoryResponseItem(
     @SerializedName("category_name")
     val categoryName: String,
+    @SerializedName("category_name_sa")
+    val categoryNameSanskrit: String,
     @SerializedName("__createdtime__")
     val createdtime: Long,
     @SerializedName("category_id")

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.rohit.quizzon.R
 import com.rohit.quizzon.data.model.QuizResult
 import com.rohit.quizzon.data.model.response.QuizResponse
 import com.rohit.quizzon.databinding.FragmentPlayQuizBinding
@@ -83,7 +84,6 @@ class PlayQuizFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun checkAnswer(quizData: QuizResponse) {
         if (currentPosition + 1 != quizData.totalQuestion) {
             binding.btnCheckAnswer.text = "Next"
@@ -98,7 +98,7 @@ class PlayQuizFragment : Fragment() {
                 wrongAnswer++
                 binding.apply {
                     textAnswerStatus.isVisible = true
-                    binding.textAnswerStatus.text = "Wrong"
+                    binding.textAnswerStatus.text = resources.getString(R.string.wrong)
                     textRightAnswer.isVisible = true
                     textRightAnswer.text = "Right Answer: $answer"
                 }

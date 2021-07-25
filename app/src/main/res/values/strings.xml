@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Quizzon</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name" translatable="false">Quizzon</string>
     <string name="sign_up">Sign Up</string>
     <string name="enter_your_password">Enter Your Password</string>
     <string name="enter_your_email">Enter Your Email</string>
@@ -16,6 +15,8 @@
     <string name="write_question">Write Question</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="option_label">Option %d %s</string>
+    <string name="answer_label">Answer %s</string>
     <string name="option1">Option 1</string>
     <string name="option2">Option 2</string>
     <string name="option3">Option 3</string>
@@ -23,6 +24,7 @@
     <string name="save">Save</string>
     <string name="choose_category">Choose Category</string>
     <string name="correct_option">Correct Option</string>
+
     <style name="all_quizzes">All Quiz</style>
 
     <string name="about_app">Quizzon is app where you can create your own quizzes and share with your contact and also can play many quiz free.</string>
@@ -66,5 +68,11 @@
     <string name="wrong">Wrong</string>
     <string name="don_t_worry_we_will_help_you">Don\'t worry we will help you!</string>
     <string name="quiz_created">Quiz Created:-</string>
+    <string name="english">English</string>
+    <string name="sanskrit">Sanskrit</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="total_question">Total Question: %s</string>
+    <string name="category_name">Category: %s</string>
+    <string name="created_by">Created by: %s</string>
 
 </resources>

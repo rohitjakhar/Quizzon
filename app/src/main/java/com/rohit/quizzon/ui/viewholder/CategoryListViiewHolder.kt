@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
 import com.rohit.quizzon.databinding.SingleCategoryBinding
 import com.rohit.quizzon.utils.listener.CategoryClickListner
+import java.util.Locale
 
 class CategoryListViiewHolder(
     private val binding: SingleCategoryBinding
@@ -13,12 +14,19 @@ class CategoryListViiewHolder(
 
     fun bind(
         categoryResponseItem: CategoryResponseItem,
-        categoryClickListner: CategoryClickListner
+        categoryClickListener: CategoryClickListner
     ) {
-        binding.textCategoryName.text = categoryResponseItem.categoryName
+        binding.textCategoryName.text = when (Locale.getDefault().displayLanguage) {
+            "sa" -> {
+                categoryResponseItem.categoryNameSanskrit
+            }
+            else -> {
+                categoryResponseItem.categoryName
+            }
+        }
 
         binding.textCategoryName.setOnClickListener {
-            categoryClickListner.onCategoryListner(categoryResponseItem.id)
+            categoryClickListener.onCategoryListner(categoryResponseItem.id)
         }
     }
 

@@ -23,12 +23,8 @@ import com.rohit.quizzon.databinding.DialogQuestionAddBinding
 import com.rohit.quizzon.databinding.FragmentCreateQuizBinding
 import com.rohit.quizzon.ui.adapter.QuestionAdapter
 import com.rohit.quizzon.ui.viewmodels.CreateQuizViewModel
-import com.rohit.quizzon.utils.NetworkResponse
-import com.rohit.quizzon.utils.action
-import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.*
 import com.rohit.quizzon.utils.listener.CreateQuizListener
-import com.rohit.quizzon.utils.shortToast
-import com.rohit.quizzon.utils.snack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -83,7 +79,9 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
             createQuizViewModel.getCategoryList()
             createQuizViewModel.categoryList.collectLatest {
                 when (it) {
-                    is NetworkResponse.Success -> it.data?.let { it1 -> categoryList.addAll(it1) }
+                    is NetworkResponse.Success -> it.data?.let { it1 ->
+                        categoryList.addAll(it1)
+                    }
                     is NetworkResponse.Failure -> {
                         shortToast("Cant Load Please Refresh")
                         findNavController().navigateUp()

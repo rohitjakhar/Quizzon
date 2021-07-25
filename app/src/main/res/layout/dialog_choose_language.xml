@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RadioGroup
+            android:id="@+id/rb_choose_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:checkedButton="@id/rb_sanskrit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_english"
+                style="@style/CustomRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/english" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_sanskrit"
+                style="@style/CustomRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sanskrit" />
+    </RadioGroup>
+    <Button
+            android:id="@+id/btn_select_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_language"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rb_choose_language"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
