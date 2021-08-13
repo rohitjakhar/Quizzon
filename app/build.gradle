@@ -6,6 +6,8 @@ plugins {
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
     id('com.google.gms.google-services')
+    id('com.google.firebase.firebase-perf')
+    id('com.google.firebase.crashlytics')
 }
 
 android {
@@ -24,8 +26,8 @@ android {
         applicationId "com.rohit.quizzon"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 2
-        versionName "1.1"
+        versionCode 10
+        versionName "2.0.1"
 
         buildConfigField("String", "USERNAME", username)
         buildConfigField("String", "PASSWORD", password)
@@ -114,11 +116,22 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.2'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-perf-ktx'
+
+
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     implementation('com.github.hellosagar:ProgressButton:0.31')
     implementation "com.airbnb.android:lottie:3.7.0"
     implementation 'com.google.android.play:core:1.10.0'
+
+    // Auto Translate
+    implementation 'com.google.mlkit:translate:16.1.2'
+
+    def billing_version = "4.0.0"
+
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
 
 
 

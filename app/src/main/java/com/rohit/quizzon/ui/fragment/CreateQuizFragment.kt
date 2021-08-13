@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.rohit.quizzon.R
 import com.rohit.quizzon.data.model.CreateQuestionData
 import com.rohit.quizzon.data.model.body.QuestionBody
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
@@ -54,6 +55,7 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
         addViewForProgress()
         initCategory()
         createQuizViewModel.getUserProfile()
+        createQuizViewModel.getCategoryList()
         initUser()
         initRecyclerView()
         binding.fabAddQuestion.setOnClickListener {
@@ -76,14 +78,13 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
 
     private fun initCategory() {
         lifecycleScope.launchWhenStarted {
-            createQuizViewModel.getCategoryList()
             createQuizViewModel.categoryList.collectLatest {
                 when (it) {
                     is NetworkResponse.Success -> it.data?.let { it1 ->
                         categoryList.addAll(it1)
                     }
                     is NetworkResponse.Failure -> {
-                        shortToast("Cant Load Please Refresh")
+                        shortToast(resources.getString(R.string.error_cant_load))
                         findNavController().navigateUp()
                     }
                     is NetworkResponse.Loading -> {
@@ -124,9 +125,11 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
     @SuppressLint("ClickableViewAccessibility")
     private fun showDialog() {
         val mView = DialogQuestionAddBinding.inflate(layoutInflater)
-        val dialog = MaterialAlertDialogBuilder(requireContext()).create()
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setCancelable(false)
+            .create()
         dialog.setView(mView.root)
-        dialog.setTitle("Add Questions")
+        dialog.setTitle(requireContext().getString(R.string.create_quiz))
         dialog.show()
 
         mView.textAdd.setOnClickListener {
@@ -139,25 +142,26 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
 
             when {
                 questionStatement.isEmpty() -> {
-                    mView.edQuetionStatement.error = "Enter Question Statement"
+                    mView.edQuetionStatement.error =
+                        resources.getString(R.string.error_enter_question_statement)
                 }
                 option1.isEmpty() -> {
-                    mView.edOption1.error = "Enter Option 1"
+                    mView.edOption1.error = resources.getString(R.string.error_option, 1)
                 }
                 option2.isEmpty() -> {
-                    mView.edOption2.error = "Enter Option 2"
+                    mView.edOption2.error = resources.getString(R.string.error_option, 2)
                 }
                 option3.isEmpty() -> {
-                    mView.edOption3.error = "Enter Option 3"
+                    mView.edOption3.error = resources.getString(R.string.error_option, 3)
                 }
                 option4.isEmpty() -> {
-                    mView.edOption4.error = "Enter Option 4"
+                    mView.edOption4.error = resources.getString(R.string.error_option, 4)
                 }
                 answer.isEmpty() -> {
-                    mView.answerId.error = "Write Answer"
+                    mView.answerId.error = resources.getString(R.string.error_write_answer)
                 }
                 !checkOption(option1, option2, option3, option4, answer) -> {
-                    mView.answerId.error = "Answer Not Match with options"
+                    mView.answerId.error = resources.getString(R.string.error_answer_not_match)
                 }
                 else -> {
                     saveDataToList(
@@ -196,15 +200,17 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
     private fun validateInputs(): Boolean {
         return when {
             createQuestionAdapter.itemCount < 5 -> {
-                shortToast("Please Add 5 Question at least")
+                shortToast(resources.getString(R.string.error_add_min_question))
                 false
             }
             binding.inputQuizTitle.editText?.text.isNullOrEmpty() -> {
-                binding.inputQuizTitle.editText?.error = "Enter Quiz Title"
+                binding.inputQuizTitle.editText?.error =
+                    resources.getString(R.string.error_enter_quiz_title)
                 return false
             }
             !this::selectedCategory.isInitialized -> {
-                binding.categoryQuiz.editText?.error = "Select A Category First"
+                binding.categoryQuiz.editText?.error =
+                    resources.getString(R.string.error_select_category)
                 return false
             }
             else -> true
@@ -226,6 +232,7 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
             question_list = createQuestionAdapter.currentList,
             category_id = selectedCategory.id,
             category_name = selectedCategory.categoryName,
+            category_name_sa = selectedCategory.categoryNameSanskrit,
             create_id = userId,
             create_name = userName,
             total_question = createQuestionAdapter.itemCount
@@ -236,8 +243,8 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
                 when (networkResponse) {
                     is NetworkResponse.Success -> {
                         binding.btnSaveQuiz.finished()
-                        binding.root.snack("Quiz Created! Copy quiz id") {
-                            action("Copy") {
+                        binding.root.snack(resources.getString(R.string.message_quiz_created)) {
+                            action(resources.getString(R.string.copy)) {
                                 copyQuizId(networkResponse.data?.insertedHashes?.get(0))
                             }
                         }
@@ -284,12 +291,10 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
         )
         questionList.add(createQuestionData)
         createQuestionAdapter.submitList(questionList)
-        createQuestionAdapter.notifyDataSetChanged()
         currentIndex += 1
     }
 
     override fun clickDeleteItem(position: Int) {
         questionList.removeAt(position)
-        createQuestionAdapter.notifyDataSetChanged()
     }
 }

@@ -41,7 +41,7 @@ class DataStorePreferenceStorage @Inject constructor(
         get() = dataStore.data.map { it[PREF_CHANGE_LANGUAGE] ?: "en" }
 
     override val isFirstTime: Flow<Boolean>
-        get() = dataStore.data.map { it[PREF_FIRST_TIME] ?: false }
+        get() = dataStore.data.map { it[PREF_FIRST_TIME] ?: true }
 
     override suspend fun saveUserData(user: UserProfileBody) {
         dataStore.edit { mutablePreferences ->

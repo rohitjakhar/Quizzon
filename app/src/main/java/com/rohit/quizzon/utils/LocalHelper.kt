@@ -1,9 +1,6 @@
 package com.rohit.quizzon.utils
 
-import android.annotation.TargetApi
 import android.content.Context
-import android.os.Build
-import androidx.core.graphics.TypefaceCompatUtil
 import java.util.*
 
 object LocalHelper {
@@ -12,7 +9,8 @@ object LocalHelper {
         Locale.setDefault(locale)
         val config = context.resources.configuration
         config.setLocale(locale)
-        context.createConfigurationContext(config)
+        context.createConfigurationContext(config).resources
+        config.setLayoutDirection(locale)
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 }

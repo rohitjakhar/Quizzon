@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.rohit.quizzon.R
 import com.rohit.quizzon.data.model.response.QuizResponse
 import com.rohit.quizzon.databinding.SingleUserQuizBinding
 import com.rohit.quizzon.utils.listener.QuizClickListener
@@ -25,11 +26,11 @@ class UserQuizViewHolder(
         imgDeleteItem.setOnClickListener {
             MaterialAlertDialogBuilder(binding.root.context)
                 .setTitle("Delete Quiz")
-                .setPositiveButton("Delete") { dialog, _ ->
+                .setPositiveButton(context.resources.getString(R.string.delete_quiz)) { dialog, _ ->
                     quizClickListener.quizClickListener(quizResponse)
                     dialog.dismiss()
                 }
-                .setNeutralButton("Cancel") { dialog, _ ->
+                .setNeutralButton(context.resources.getString(R.string.cancel)) { dialog, _ ->
                     dialog.dismiss()
                 }
                 .show()
@@ -42,7 +43,7 @@ class UserQuizViewHolder(
                 ) as ClipboardManager
             val clipData = ClipData.newPlainText("text", quizResponse.quizId)
             clipboardManager.setPrimaryClip(clipData)
-            binding.root.snack("Copied Link!") {}
+            binding.root.snack(context.resources.getString(R.string.copied_link)) {}
         }
         imgShare.setOnClickListener {
             val sendIntent: Intent = Intent().apply {

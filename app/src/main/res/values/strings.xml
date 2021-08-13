@@ -74,5 +74,32 @@
     <string name="total_question">Total Question: %s</string>
     <string name="category_name">Category: %s</string>
     <string name="created_by">Created by: %s</string>
+    <string name="continue_with_english">Continue with English</string>
+    <string name="continue_with_sanskrit">Continue with Sanskrit</string>
+    <string name="select_language">Select Language</string>
+    <string name="error_cant_load">Can\'t Load Please Refresh</string>
+    <string name="error_enter_question_statement">Enter Question Statement</string>
+    <string name="error_option">Enter Option: %d</string>
+    <string name="error_write_answer">Write Answer</string>
+    <string name="error_answer_not_match">Answer Not Match with options</string>
+    <string name="error_enter_quiz_title">Enter Quiz Title</string>
+    <string name="error_select_category">Select A Category First</string>
+    <string name="error_add_min_question">Please Add 5 Question at least</string>
+    <string name="message_quiz_created">Quiz Created! Copy quiz id"</string>
+    <string name="copy">Copy</string>
+    <string name="error_incorrect_quiz_id">Enter Correct Quiz Id</string>
+    <string name="error_no_data_found">Not Found Data</string>
+    <string name="message_success">Login Success</string>
+    <string name="ok">OK</string>
+    <string name="next">Next</string>
+    <string name="right">Right</string>
+    <string name="error_choose_answer">PLease Chose a Option</string>
+    <string name="message_right_answer">Right Answer: %s</string>
+    <string name="total_quiz">Total quizzes: %d</string>
+    <string name="password_not_match">Password Not Match</string>
+    <string name="result_status">%d right out of %d</string>
+    <string name="delete_quiz">Delete Quiz ?</string>
+    <string name="copied_link">Link Copy!</string>
+    <string name="upload_quiz">Upload Quiz</string>
 
 </resources>

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.rohit.quizzon.R
 import com.rohit.quizzon.databinding.FragmentLoginBinding
 import com.rohit.quizzon.ui.activity.MainActivity
 import com.rohit.quizzon.ui.viewmodels.LoginViewModel
@@ -81,11 +82,11 @@ class LoginFragment : Fragment() {
     ): Boolean {
         return when {
             userEmail.length < 4 -> {
-                binding.userEmailInputLayout.error = "Enter Email"
+                binding.userEmailInputLayout.error = resources.getString(R.string.enter_your_email)
                 false
             }
             userPassword.length < 4 -> {
-                binding.userPasswordInputLayout.error = "Enter Password"
+                binding.userPasswordInputLayout.error = resources.getString(R.string.enter_your_password)
                 false
             }
             else -> true
@@ -97,8 +98,6 @@ class LoginFragment : Fragment() {
             loginViewModel.loginState.collectLatest { value ->
                 when (value) {
                     is NetworkResponse.Success -> {
-                        binding.root.snack("Login Success") {
-                        }
                         requireActivity().apply {
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()

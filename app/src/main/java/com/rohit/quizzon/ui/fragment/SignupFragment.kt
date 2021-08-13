@@ -1,16 +1,9 @@
 package com.rohit.quizzon.ui.fragment
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -42,7 +35,7 @@ class SignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSignupBinding.inflate(inflater, container, false)
-        initSpannableString()
+        // initSpannableString()
         initClickListener()
         initView()
         return binding.root
@@ -89,29 +82,29 @@ class SignupFragment : Fragment() {
         }
     }
 
-    private fun initSpannableString() {
-        val signupText = resources.getString(R.string.login_line)
-        val spannableStringBuilder = SpannableStringBuilder(signupText)
-        val signUpClick = object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
-            }
-        }
-        spannableStringBuilder.setSpan(
-            signUpClick,
-            25,
-            (signupText.length),
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        spannableStringBuilder.setSpan(
-            object : ForegroundColorSpan(Color.parseColor("#00AB5C")) {},
-            25,
-            (signupText.length),
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        binding.textLogin.movementMethod = LinkMovementMethod.getInstance()
-        binding.textLogin.setText(spannableStringBuilder, TextView.BufferType.SPANNABLE)
-    }
+//    private fun initSpannableString() {
+//        val signupText = resources.getString(R.string.login_line)
+//        val spannableStringBuilder = SpannableStringBuilder(signupText)
+//        val signUpClick = object : ClickableSpan() {
+//            override fun onClick(widget: View) {
+//                findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
+//            }
+//        }
+//        spannableStringBuilder.setSpan(
+//            signUpClick,
+//            25,
+//            (signupText.length),
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//        spannableStringBuilder.setSpan(
+//            object : ForegroundColorSpan(Color.parseColor("#00AB5C")) {},
+//            25,
+//            (signupText.length),
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//        binding.textLogin.movementMethod = LinkMovementMethod.getInstance()
+//        binding.textLogin.setText(spannableStringBuilder, TextView.BufferType.SPANNABLE)
+//    }
 
     private fun checkStatus() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -149,19 +142,19 @@ class SignupFragment : Fragment() {
     ): Boolean {
         return when {
             userEmail.length < 6 -> {
-                binding.userEmailInputLayout.error = "Enter your Email"
+                binding.userEmailInputLayout.error = resources.getString(R.string.enter_your_email)
                 false
             }
             userName.length < 4 -> {
-                binding.userNameInputLayout.error = "Enter your Name"
+                binding.userNameInputLayout.error = resources.getString(R.string.enter_your_name)
                 false
             }
             userPassword != userConfirmPassword -> {
-                binding.userConfirmPasswordInputLayout.error = "Password Not Match"
+                binding.userConfirmPasswordInputLayout.error = resources.getString(R.string.password_not_match)
                 return false
             }
             userPassword.length < 4 -> {
-                binding.userPasswordInputLayout.error = "Enter your Password"
+                binding.userPasswordInputLayout.error = resources.getString(R.string.enter_your_password)
                 false
             }
             else -> true

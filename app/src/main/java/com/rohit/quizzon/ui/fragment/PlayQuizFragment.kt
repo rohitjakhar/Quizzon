@@ -1,6 +1,5 @@
 package com.rohit.quizzon.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +30,6 @@ class PlayQuizFragment : Fragment() {
     private lateinit var quizData: QuizResponse
     private var isCheckedAnswer = false
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,7 +46,6 @@ class PlayQuizFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     private fun chekButton() {
         if (isCheckedAnswer) {
             isCheckedAnswer = false
@@ -67,14 +64,14 @@ class PlayQuizFragment : Fragment() {
                 binding.apply {
                     textAnswerStatus.isVisible = false
                     textRightAnswer.isVisible = false
-                    btnCheckAnswer.text = "Check Answer"
+                    btnCheckAnswer.text = resources.getString(R.string.check_answer)
                     radioGroupOption.clearCheck()
                 }
                 updateView()
             }
         } else {
             if (binding.radioGroupOption.checkedRadioButtonId == -1) {
-                shortToast("PLease Chose A Option")
+                shortToast(resources.getString(R.string.error_choose_answer))
             } else {
                 viewLifecycleOwner.lifecycleScope.launch {
                     checkAnswer(args.quizData)
@@ -86,25 +83,25 @@ class PlayQuizFragment : Fragment() {
 
     private fun checkAnswer(quizData: QuizResponse) {
         if (currentPosition + 1 != quizData.totalQuestion) {
-            binding.btnCheckAnswer.text = "Next"
+            binding.btnCheckAnswer.text = resources.getString(R.string.next)
             val answer = quizData.questionList[currentPosition].answer
             val selectedAnswer =
                 requireActivity().findViewById<RadioButton>(binding.radioGroupOption.checkedRadioButtonId)
             if (answer == selectedAnswer.text) {
                 rightAnswer++
                 binding.textAnswerStatus.isVisible = true
-                binding.textAnswerStatus.text = "Right"
+                binding.textAnswerStatus.text = resources.getString(R.string.right)
             } else {
                 wrongAnswer++
                 binding.apply {
                     textAnswerStatus.isVisible = true
                     binding.textAnswerStatus.text = resources.getString(R.string.wrong)
                     textRightAnswer.isVisible = true
-                    textRightAnswer.text = "Right Answer: $answer"
+                    textRightAnswer.text = resources.getString(R.string.message_right_answer, answer)
                 }
             }
         } else {
-            binding.btnCheckAnswer.text = "Result"
+            binding.btnCheckAnswer.text = resources.getString(R.string.result)
         }
         currentPosition++
     }

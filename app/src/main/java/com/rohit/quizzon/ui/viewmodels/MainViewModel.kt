@@ -3,6 +3,7 @@ package com.rohit.quizzon.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rohit.quizzon.data.local.DataStorePreferenceStorage
+import com.rohit.quizzon.utils.Config.Companion.currentLanguage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,5 +14,6 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
     fun changeLanguage(language: String) = viewModelScope.launch {
         dataStorePreferenceStorage.changeLanguage(language)
+        currentLanguage = language
     }
 }

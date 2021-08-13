@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val fragmentManager: NavHostFragment =
             supportFragmentManager.findFragmentById(R.id.home_container_view) as NavHostFragment
         val navController = fragmentManager.navController
@@ -98,19 +97,19 @@ class MainActivity : AppCompatActivity() {
             mView.btnSelectLanguage.setOnClickListener {
                 when (mView.rbChooseLanguage.checkedRadioButtonId) {
                     mView.rbEnglish.id -> {
+                        viewModel.changeLanguage("en")
                         LocalHelper.setAppLocale(this, "en")
                         chooseLanguageDialog.dismiss()
-                        shortToast("English Selected")
-                        viewModel.changeLanguage("en")
                         chooseLanguageDialog.dismiss()
-                        recreate()
+                        finish()
+                        startActivity(intent)
                     }
                     mView.rbSanskrit.id -> {
-                        LocalHelper.setAppLocale(this, "sa")
-                        shortToast("Sanskrit Selected")
                         viewModel.changeLanguage("sa")
+                        LocalHelper.setAppLocale(this, "sa")
                         chooseLanguageDialog.dismiss()
-                        recreate()
+                        finish()
+                        startActivity(intent)
                     }
                     else -> {
                         shortToast("Nothing Selected")

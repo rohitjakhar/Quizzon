@@ -18,4 +18,6 @@
     <color name="deep_orange_100">#FAD0C4</color>
     <color name="cyan_a400">#00F2FE</color>
     <color name="blue_400">#4FACFE</color>
+    <color name="blue_400t">#25283E</color>
+    <color name="blue_400ft">#B08D96D5</color>
 </resources>

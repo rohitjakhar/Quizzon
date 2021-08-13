@@ -12,6 +12,8 @@ data class QuizResponse(
     val categoryId: String,
     @SerializedName("category_name")
     val categoryName: String,
+    @SerializedName("category_name_sa")
+    val categoryNameSanskrit: String,
     @SerializedName("create_id")
     val createId: String,
     @SerializedName("create_name")

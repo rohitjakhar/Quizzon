@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.rohit.quizzon.databinding.FragmentAuthHomeBinding
 import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.shortToast
 
 class AuthHomeFragment : Fragment() {
 

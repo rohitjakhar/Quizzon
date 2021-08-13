@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.rohit.quizzon.databinding.FragmentAboutBinding
 import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +25,21 @@ class AboutFragment : Fragment() {
         binding = FragmentAboutBinding.inflate(inflater, container, false)
         handleClickListener()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initReview()
+    }
+
+    private fun initReview() {
+        val manager = ReviewManagerFactory.create(requireContext())
+        val request = manager.requestReviewFlow()
+        request.addOnSuccessListener { reviewInfo ->
+            val flow = manager.launchReviewFlow(requireActivity(), reviewInfo)
+            flow.addOnSuccessListener {
+            }
+        }
     }
 
     private fun handleClickListener() = binding.apply {

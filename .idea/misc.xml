@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_splash_scren.xml" value="0.3572916666666667" />
+        <entry key="app/src/main/res/layout/dialog_question_add.xml" value="0.4146576663452266" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.3572916666666667" />
+        <entry key="app/src/main/res/layout/fragment_create_quiz.xml" value="0.3572916666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3194444444444444" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3194444444444444" />
+      </map>
+    </option>
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Documents/Quizzon" />
     <option name="OTHER_OPTIONS" value="sfd" />

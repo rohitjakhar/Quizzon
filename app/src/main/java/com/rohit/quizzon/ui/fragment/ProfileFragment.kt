@@ -1,6 +1,5 @@
 package com.rohit.quizzon.ui.fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import com.rohit.quizzon.R
 import com.rohit.quizzon.data.model.body.UserProfileBody
 import com.rohit.quizzon.data.model.response.DeleteResponseBody
 import com.rohit.quizzon.data.model.response.QuizResponse
@@ -83,7 +83,6 @@ class ProfileFragment : Fragment(), QuizClickListener {
                             quizList.clear()
                             quizList.addAll(it)
                             userQuizAdapter.submitList(quizList)
-                            userQuizAdapter.notifyDataSetChanged()
                         }
                         stopShimmerLoading()
                     }
@@ -113,11 +112,10 @@ class ProfileFragment : Fragment(), QuizClickListener {
         homeShimmerEffect.startShimmer()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateView() = binding.apply {
         textUserName.text = userProfileBody.username
         textUserEmail.text = userProfileBody.userEmail
-        textUserNumberOfQuiz.text = "Total Quizzes: ${quizList.size}"
+        textUserNumberOfQuiz.text = resources.getString(R.string.total_quiz, quizList.size)
         textEmptyData.isVisible = quizList.isEmpty()
     }
 
@@ -129,7 +127,7 @@ class ProfileFragment : Fragment(), QuizClickListener {
             profileViewModel.deleteQuizReponse.collectLatest { value: NetworkResponse<DeleteResponseBody> ->
                 when (value) {
                     is NetworkResponse.Success -> {
-                        binding.root.snack("Deleted") {}
+                        binding.root.snack(resources.getString(R.string.delete)) {}
                     }
                     is NetworkResponse.Failure -> {
                         binding.root.snack("${value.message}") {}

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
 import com.rohit.quizzon.databinding.SingleCategoryBinding
+import com.rohit.quizzon.utils.Config.Companion.currentLanguage
 import com.rohit.quizzon.utils.listener.CategoryClickListner
 import java.util.Locale
 
@@ -16,7 +17,7 @@ class CategoryListViiewHolder(
         categoryResponseItem: CategoryResponseItem,
         categoryClickListener: CategoryClickListner
     ) {
-        binding.textCategoryName.text = when (Locale.getDefault().displayLanguage) {
+        binding.textCategoryName.text = when (currentLanguage) {
             "sa" -> {
                 categoryResponseItem.categoryNameSanskrit
             }

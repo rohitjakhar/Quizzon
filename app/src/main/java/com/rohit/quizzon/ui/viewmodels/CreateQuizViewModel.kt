@@ -9,6 +9,7 @@ import com.rohit.quizzon.data.model.response.DataInsertResponse
 import com.rohit.quizzon.data.remote.RemoteRepository
 import com.rohit.quizzon.utils.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,16 +34,20 @@ class CreateQuizViewModel @Inject constructor(
     val userProfile get() = _userProfile
 
     fun getUserProfile() {
-        viewModelScope.launch {
+        viewModelScope.launch(IO) {
             _userProfile.value = remoteRepository.getUserProfile()
         }
     }
 
-    suspend fun uploadQuiz(quizBody: QuestionBody) {
-        _uploadResponse.value = remoteRepository.uploadQuiz(quizBody)
+    fun uploadQuiz(quizBody: QuestionBody) {
+        viewModelScope.launch(IO) {
+            _uploadResponse.value = remoteRepository.uploadQuiz(quizBody)
+        }
     }
 
-    suspend fun getCategoryList() {
-        _categoryList.value = remoteRepository.categoryList()
+    fun getCategoryList() {
+        viewModelScope.launch(IO) {
+            _categoryList.value = remoteRepository.categoryList()
+        }
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.rohit.quizzon.R
 import com.rohit.quizzon.databinding.FragmentForgetPasswordBinding
 import com.rohit.quizzon.utils.action
 import com.rohit.quizzon.utils.autoCleaned
@@ -42,11 +43,11 @@ class ForgetPasswordFragment : Fragment() {
                 firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
                     if (it.isSuccessful) {
                         binding.root.snack("${it.result}") {
-                            action("ok") {}
+                            action(resources.getString(R.string.ok)) {}
                         }
                     } else {
                         binding.root.snack("Error:${it.exception?.localizedMessage}") {
-                            action("ok") {}
+                            action(resources.getString(R.string.ok)) {}
                         }
                     }
                 }

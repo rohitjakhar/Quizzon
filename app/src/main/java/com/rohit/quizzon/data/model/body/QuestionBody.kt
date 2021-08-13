@@ -7,6 +7,7 @@ data class QuestionBody(
     var create_id: String,
     val category_id: String,
     val category_name: String,
+    val category_name_sa: String,
     var create_name: String,
     val question_list: List<CreateQuestionData>,
     val total_question: Int

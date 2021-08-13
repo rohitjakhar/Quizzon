@@ -10,10 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.rohit.quizzon.R
 import com.rohit.quizzon.databinding.DialogQuizIdBinding
 import com.rohit.quizzon.databinding.FragmentHomeBinding
 import com.rohit.quizzon.ui.adapter.CategoryAdapter
 import com.rohit.quizzon.ui.viewmodels.HomeViewModel
+import com.rohit.quizzon.utils.Config.Companion.currentLanguage
 import com.rohit.quizzon.utils.NetworkResponse
 import com.rohit.quizzon.utils.autoCleaned
 import com.rohit.quizzon.utils.listener.CategoryClickListner
@@ -27,14 +29,19 @@ class HomeFragment : Fragment(), CategoryClickListner {
     private var binding: FragmentHomeBinding by autoCleaned()
     private var categoryAdapter by autoCleaned { CategoryAdapter(this) }
     private val homeViewModel: HomeViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         startShimmer()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.rvCategory.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = categoryAdapter
@@ -47,7 +54,6 @@ class HomeFragment : Fragment(), CategoryClickListner {
         binding.cvJoinQuiz.setOnClickListener {
             showInputDialog()
         }
-        return binding.root
     }
 
     private fun showInputDialog() {
@@ -55,9 +61,8 @@ class HomeFragment : Fragment(), CategoryClickListner {
         mView.btnJoinQuiz.setDisableViews(listOf(mView.textInputLayout))
         val dialog = MaterialAlertDialogBuilder(requireContext()).create()
         dialog.setView(mView.root)
-        dialog.setTitle("Join Quiz")
+        dialog.setTitle(getString(R.string.join_quiz))
         dialog.show()
-
         mView.btnJoinQuiz.setOnClickListener {
             val quizid = mView.textInputLayout.editText?.text?.trim().toString()
             if (quizid.isNotEmpty()) {
@@ -65,7 +70,7 @@ class HomeFragment : Fragment(), CategoryClickListner {
                 homeViewModel.loadQuiz(quizid)
                 loadQuizDataAndNavigateQuizPlay(mView)
             } else {
-                mView.textInputLayout.error = "Enter Correct Quiz Id"
+                mView.textInputLayout.error = resources.getString(R.string.error_incorrect_quiz_id)
             }
         }
     }
@@ -82,7 +87,7 @@ class HomeFragment : Fragment(), CategoryClickListner {
                                     it
                                 )
                             )
-                        } ?: shortToast("Not Found Data")
+                        } ?: shortToast(resources.getString(R.string.error_no_data_found))
                     }
                     is NetworkResponse.Failure -> {
                         mView.btnJoinQuiz.reset()
@@ -102,7 +107,7 @@ class HomeFragment : Fragment(), CategoryClickListner {
                 when (networkResponse) {
                     is NetworkResponse.Success -> {
                         val categoryList = networkResponse.data?.sortedBy {
-                            it.categoryName
+                            if (currentLanguage == "en") it.categoryName else it.categoryNameSanskrit
                         }
                         categoryAdapter.submitList(categoryList)
                         stopShimmer()

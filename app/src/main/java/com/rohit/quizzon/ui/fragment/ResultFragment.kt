@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.rohit.quizzon.R
 import com.rohit.quizzon.data.model.QuizResult
 import com.rohit.quizzon.databinding.FragmentResultBinding
 import com.rohit.quizzon.utils.autoCleaned
@@ -39,8 +40,11 @@ class ResultFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun updateUi(resultModel: QuizResult) = binding.apply {
-        textResultQuestion.text =
-            "${resultModel.rightAnswer} right out of ${resultModel.totalQuestion}"
+        textResultQuestion.text = resources.getString(
+            R.string.result_status,
+            resultModel.rightAnswer,
+            resultModel.totalQuestion
+        )
         val result = (resultModel.rightAnswer.toDouble() / resultModel.totalQuestion) * 100
         btnResult.text = "${round(result)}%"
     }

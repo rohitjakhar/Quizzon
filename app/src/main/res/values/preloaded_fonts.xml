@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
-        <item>@font/martel_sans</item>
-        <item>@font/roboto_mono</item>
+        <item>@font/laila</item>
     </array>
 </resources>

@@ -1,6 +1,5 @@
 package com.rohit.quizzon.ui.viewholder
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,10 +14,9 @@ class CreateQuestionViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
-    @SuppressLint("SetTextI18n")
     fun bind(questionData: CreateQuestionData) = binding.apply {
         val context = root.context
-        textQuestionIndex.text = questionData.questionIndex.toString()
+        textQuestionIndex.text = (questionData.questionIndex + 1).toString()
         textQuestionStatement.text = questionData.questionStatement
         textOption1.text = context.getString(R.string.option_label, 1, questionData.option1)
         textOption2.text = context.getString(R.string.option_label, 2, questionData.option2)

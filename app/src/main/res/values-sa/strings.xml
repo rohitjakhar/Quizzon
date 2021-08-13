@@ -54,6 +54,7 @@
     <string name="questions">प्रश्नाः</string>
     <string name="login_success">सफलः सम्प्रवेशः</string>
     <string name="uploaded">उपारोपण</string>
+    <string name="upload_quiz">प्रश्न-मञ्चस्य उपारोपणम् कुरु</string>
     <string name="play_quiz">प्रश्नोत्तर परीक्षा आरम्भं करोतु</string>
     <string name="result">परिणाम</string>
     <string name="start">आरम्भं करोति </string>
@@ -78,4 +79,31 @@
     <string name="total_question">सकल प्रश्न: %s</string>
     <string name="category_name">वर्गं : %s</string>
     <string name="created_by">निर्मातृ : %s</string>
+
+    <string name="continue_with_english">आङ्ग्लभाषायां पश्यतु</string>
+    <string name="continue_with_sanskrit">" संस्कृतभाषायां पश्यतु"</string>
+    <string name="select_language">" भाषां चिनोतु"</string>
+    <string name="error_cant_load">सम्यक् न चलति अयं, कृपया पुनःसम्पादनं कुरु</string>
+    <string name="error_enter_question_statement">प्रश्न-वाक्यं लिखतु</string>
+    <string name="error_option">िकल्पं लिखतु: %d</string>
+    <string name="error_write_answer">उत्तरं ददातु</string>
+    <string name="error_answer_not_match">उत्तरं असत्यं</string>
+    <string name="error_enter_quiz_title">प्रश्न-मञ्चस्य शीषर्कँ ददातु</string>
+    <string name="error_select_category">चिनोतु A वर्गः</string>
+    <string name="error_add_min_question">न्युनाति-न्यूनं पञ्च प्रश्नान् ददातु</string>
+    <string name="message_quiz_created">प्रश्न मञ्चः रचितः, प्रश्न-मञ्चस्य परिचय-पदस्य परीलेखं कुरु</string>
+    <string name="copy">"प्रतिकृतिः "</string>
+    <string name="right">सत्यम्</string>
+    <string name="next">अग्रे गच्छ</string>
+    <string name="error_choose_answer">कृपया विकल्प A चिनोतु</string>
+    <string name="ok">अस्तु</string>
+    <string name="error_incorrect_quiz_id">कृपया सत्यम् प्रश्न-मञ्चस्य परिचय-पदं लिखतु</string>
+    <string name="error_no_data_found">" दत्तांशाः उपलब्धाः न सन्ति"</string>
+    <string name="message_success">" प्रवेशे सफलता"</string>
+    <string name="message_right_answer">सत्यम् उत्तरम् %s</string>
+    <string name="total_quiz">सर्वे प्रश्न-मञ्चाः %s</string>
+    <string name="password_not_match">गुप्तपदं असत्यम्</string>
+    <string name="copied_link">आन्तरजालिय-पथस्य प्रतिकृतिः अभवत्</string>
+    <string name="delete_quiz">" प्रश्न-मञ्चस्य निष्कासम् कुरु?"</string>
+    <string name="result_status">%d right out of %d</string>
 </resources>
