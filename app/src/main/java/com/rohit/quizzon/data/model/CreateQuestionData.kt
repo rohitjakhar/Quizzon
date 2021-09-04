@@ -1,7 +1,7 @@
 package com.rohit.quizzon.data.model
 
 data class CreateQuestionData(
-    val questionIndex: Int,
+    var questionIndex: Int = 0,
     val questionStatement: String,
     val option1: String,
     val option2: String,
