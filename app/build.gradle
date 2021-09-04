@@ -3,20 +3,20 @@ plugins {
     id('kotlin-android')
     id('kotlin-kapt')
     id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
     id('com.google.gms.google-services')
     id('org.jetbrains.kotlin.android.extensions')
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('/home/rohit/Documents/Quizzon/quizzonkey.jks')
-            storePassword storePassword
-            keyAlias keyAlias
-            keyPassword keyPassword
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file('/home/rohit/Documents/Quizzon/quizzonkey.jks')
+//            storePassword storePassword
+//            keyAlias keyAlias
+//            keyPassword keyPassword
+//        }
+//    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -27,8 +27,8 @@ android {
         versionCode 2
         versionName "1.1"
 
-        buildConfigField("String", "USERNAME", username)
-        buildConfigField("String", "PASSWORD", password)
+        buildConfigField("String", "USERNAME", )
+        buildConfigField("String", "PASSWORD", )
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -70,7 +70,7 @@ dependencies {
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0") {
-        because("Co routine library")
+        because("Coroutine library")
     }
 
     implementation('com.squareup.retrofit2:retrofit:2.9.0') {

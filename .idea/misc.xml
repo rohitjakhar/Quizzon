@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/91810/StudioProjects/Quizzon/app/src/main/res/layout/fragment_create_quiz.xml" value="0.176" />
+        <entry key="..\:/Users/91810/StudioProjects/Quizzon/app/src/main/res/layout/single_create_question.xml" value="0.4" />
+      </map>
+    </option>
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Documents/Quizzon" />
     <option name="OTHER_OPTIONS" value="sfd" />
     <option name="HEAP_SIZE" value="sfd" />
     <option name="LOCALE" value="sdf" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
