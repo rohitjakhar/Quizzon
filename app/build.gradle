@@ -29,8 +29,8 @@ android {
         versionCode 10
         versionName "2.0.1"
 
-        buildConfigField("String", "USERNAME", username)
-        buildConfigField("String", "PASSWORD", password)
+        buildConfigField("String", "USERNAME", )
+        buildConfigField("String", "PASSWORD", )
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,7 +64,6 @@ dependencies {
     }
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Testing
     testImplementation 'junit:junit:4.13.2'
@@ -73,7 +72,7 @@ dependencies {
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0") {
-        because("Co routine library")
+        because("Coroutine library")
     }
 
     implementation('com.squareup.retrofit2:retrofit:2.9.0') {

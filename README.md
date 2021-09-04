@@ -6,9 +6,9 @@
 
 # Application Install
 
-***You can Install and test latest QuizZon app from below 👇***
+***You can Install QuizZon app from playstore 👇***
 
-[![QuizZon](https://img.shields.io/badge/QuizZon✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/rohitjakhar/Quizzon/raw/master/app/release/app-release.apk)
+[![QuizZon](https://img.shields.io/badge/QuizZon✅-APK-red.svg?style=for-the-badge&logo=googleplay)](https://play.google.com/store/apps/details?id=com.rohit.quizzon)
 
 ## Setup
 Clone the repository on your machine. Open the project on your IDE and connect it to firebase and harperDB and everything will be setup
@@ -91,5 +91,22 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
- ## Contact
-If you need any help, you can connect with me.
+## Contribute 🤝
+
+If you want to contribute to this library, you're always welcome!
+
+## Contact 📩
+
+Have an project? DM us at 👇<br>
+[![Mail](https://img.shields.io/badge/Gmail-green.svg?style=for-the-badge&logo=gmail)](mailto://rohitjakhar940@gmail.com)
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-red.svg?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/rohitjakhar0/)
+
+
+## Donation 💰
+
+If this project help you reduce time to develop, you can give me a cup of coffee :)
+
+<a href="https://www.buymeacoffee.com/rohitjakhar" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+<br>

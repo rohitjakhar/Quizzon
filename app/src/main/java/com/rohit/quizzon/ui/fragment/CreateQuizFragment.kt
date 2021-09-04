@@ -24,22 +24,27 @@ import com.rohit.quizzon.databinding.DialogQuestionAddBinding
 import com.rohit.quizzon.databinding.FragmentCreateQuizBinding
 import com.rohit.quizzon.ui.adapter.QuestionAdapter
 import com.rohit.quizzon.ui.viewmodels.CreateQuizViewModel
-import com.rohit.quizzon.utils.*
-import com.rohit.quizzon.utils.listener.CreateQuizListener
+import com.rohit.quizzon.utils.NetworkResponse
+import com.rohit.quizzon.utils.action
+import com.rohit.quizzon.utils.autoCleaned
+import com.rohit.quizzon.utils.shortToast
+import com.rohit.quizzon.utils.snack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
+private const val TAG = "CreateQuizFragment"
+
 @AndroidEntryPoint
-class CreateQuizFragment : Fragment(), CreateQuizListener {
+class CreateQuizFragment : Fragment() {
 
     private var binding: FragmentCreateQuizBinding by autoCleaned()
-    private val createQuestionAdapter: QuestionAdapter by autoCleaned {
-        QuestionAdapter(
-            this
-        )
-    }
     private val createQuizViewModel: CreateQuizViewModel by viewModels()
     private val questionList = arrayListOf<CreateQuestionData>()
+    private val createQuestionAdapter: QuestionAdapter by autoCleaned {
+        QuestionAdapter {
+            createQuizViewModel.removeQuestion(it)
+        }
+    }
     private var currentIndex = 0
     private var categoryList = arrayListOf<CategoryResponseItem>()
     private lateinit var selectedCategory: CategoryResponseItem
@@ -55,14 +60,20 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
         addViewForProgress()
         initCategory()
         createQuizViewModel.getUserProfile()
-        createQuizViewModel.getCategoryList()
         initUser()
         initRecyclerView()
+        observeList()
         binding.fabAddQuestion.setOnClickListener {
             showDialog()
         }
         initUploadClickListener()
         return binding.root
+    }
+
+    private fun observeList() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+        createQuizViewModel.questionList.collectLatest {
+            createQuestionAdapter.submitList(it)
+        }
     }
 
     private fun addViewForProgress() = binding.apply {
@@ -286,15 +297,8 @@ class CreateQuizFragment : Fragment(), CreateQuizListener {
             option2 = op2,
             option3 = op3,
             option4 = op4,
-            questionIndex = currentIndex,
             answer = answer
         )
-        questionList.add(createQuestionData)
-        createQuestionAdapter.submitList(questionList)
-        currentIndex += 1
-    }
-
-    override fun clickDeleteItem(position: Int) {
-        questionList.removeAt(position)
+        createQuizViewModel.addQuestion(createQuestionData)
     }
 }

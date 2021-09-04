@@ -2,6 +2,7 @@ package com.rohit.quizzon.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rohit.quizzon.data.model.CreateQuestionData
 import com.rohit.quizzon.data.model.body.QuestionBody
 import com.rohit.quizzon.data.model.body.UserProfileBody
 import com.rohit.quizzon.data.model.response.CategoryResponseItem
@@ -11,6 +12,7 @@ import com.rohit.quizzon.utils.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,6 +30,24 @@ class CreateQuizViewModel @Inject constructor(
     private var _uploadResponse: MutableStateFlow<NetworkResponse<DataInsertResponse>> =
         MutableStateFlow(NetworkResponse.Loading())
     val uploadResponse get() = _uploadResponse
+
+    private val _questionList = MutableStateFlow<List<CreateQuestionData>>(mutableListOf())
+    val questionList = _questionList.asStateFlow()
+
+    var index = 0
+
+    fun addQuestion(createQuestionData: CreateQuestionData) = viewModelScope.launch {
+        val list = questionList.value.toMutableList()
+        createQuestionData.questionIndex = index++
+        list.add(createQuestionData)
+        _questionList.emit(list)
+    }
+
+    fun removeQuestion(index: Int) = viewModelScope.launch {
+        val list = questionList.value.toMutableList()
+        list.removeAt(index)
+        _questionList.emit(list)
+    }
 
     private var _userProfile: MutableStateFlow<UserProfileBody> =
         MutableStateFlow(UserProfileBody("", "", ""))
