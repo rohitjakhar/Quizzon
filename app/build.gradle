@@ -11,14 +11,6 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('/home/rohit/Documents/Quizzon/quizzonkey.jks')
-            storePassword storePassword
-            keyAlias keyAlias
-            keyPassword keyPassword
-        }
-    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -28,9 +20,8 @@ android {
         targetSdkVersion 30
         versionCode 10
         versionName "2.0.1"
-
-        buildConfigField("String", "USERNAME", )
-        buildConfigField("String", "PASSWORD", )
+        buildConfigField("String", "USERNAME", "\"Name\"")
+        buildConfigField("String", "PASSWORD", "\"Password\"")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
