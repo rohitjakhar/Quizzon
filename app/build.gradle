@@ -11,22 +11,34 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.rohit.quizzon"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 10
         versionName "2.0.1"
-        buildConfigField("String", "USERNAME", "\"Name\"")
-        buildConfigField("String", "PASSWORD", "\"Password\"")
+        buildConfigField("String", "USERNAME", username)
+        buildConfigField("String", "PASSWORD", password)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    android {
+        bundle {
+            language {
+                // Specifies that the app bundle should not support
+                // configuration APKs for language resources. These
+                // resources are instead packaged with each base and
+                // dynamic feature APK.
+                enableSplit = false
+            }
+        }
+    }
+
     buildFeatures {
-        viewBinding = true
+        viewBinding true
     }
 
     buildTypes {
@@ -38,6 +50,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -45,10 +58,10 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0-rc01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.5.0-alpha02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version") {
         because("Navigation Component")
@@ -62,7 +75,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0") {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1") {
         because("Coroutine library")
     }
 
@@ -85,7 +98,7 @@ dependencies {
     }
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
-    implementation("androidx.datastore:datastore-preferences:1.0.0-beta02") {
+    implementation("androidx.datastore:datastore-preferences:1.0.0") {
         because("Data Storeage")
     }
 
@@ -110,14 +123,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf-ktx'
 
 
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
     implementation('com.github.hellosagar:ProgressButton:0.31')
-    implementation "com.airbnb.android:lottie:3.7.0"
+    implementation "com.airbnb.android:lottie:4.1.0"
     implementation 'com.google.android.play:core:1.10.0'
-
-    // Auto Translate
-    implementation 'com.google.mlkit:translate:16.1.2'
 
     def billing_version = "4.0.0"
 

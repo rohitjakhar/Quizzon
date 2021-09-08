@@ -28,11 +28,8 @@ import com.rohit.quizzon.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-private const val TAG = "CreateQuizFragment"
-
 @AndroidEntryPoint
 class CreateQuizFragment : Fragment() {
-
     private var binding: FragmentCreateQuizBinding by autoCleaned()
     private val createQuizViewModel: CreateQuizViewModel by viewModels()
     private val questionList = arrayListOf<CreateQuestionData>()
@@ -41,7 +38,6 @@ class CreateQuizFragment : Fragment() {
             createQuizViewModel.removeQuestion(it)
         }
     }
-    private var currentIndex = 0
     private var categoryList = arrayListOf<CategoryResponseItem>()
     private lateinit var selectedCategory: CategoryResponseItem
     private var userName: String = ""

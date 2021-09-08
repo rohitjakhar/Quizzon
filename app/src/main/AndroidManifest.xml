@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="com.android.vending.BILLING"/>
 
     <application
@@ -19,8 +18,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Quizzon">
-        <activity android:name=".ui.activity.LanguageSelectActivity"></activity>
-        <activity android:name=".ui.SplashScreen">
+        <activity android:name=".ui.activity.LanguageSelectActivity" />
+        <activity android:name=".ui.SplashScreen"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +29,7 @@
         </activity>
         <activity
                 android:name=".ui.activity.AuthActivity"
-                android:windowSoftInputMode="adjustResize"></activity>
+                android:windowSoftInputMode="adjustResize" />
         <activity
                 android:name=".ui.activity.MainActivity"
                 android:windowSoftInputMode="adjustResize" />

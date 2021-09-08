@@ -1,5 +1,6 @@
 package com.rohit.quizzon.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -47,6 +48,7 @@ class ProfileFragment : Fragment(), QuizClickListener {
         initRecyclerView()
         profileViewModel.getUserProfile()
         loadUserProfile()
+
         binding.btnUserLogout.setOnClickListener {
             firebaseAuth.signOut()
             profileViewModel.clearDataStore()
@@ -75,13 +77,14 @@ class ProfileFragment : Fragment(), QuizClickListener {
 
     private fun loadUserQuizList() {
         showShimmerLoading()
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             profileViewModel.quizList.collectLatest { value: NetworkResponse<List<QuizResponse>> ->
                 when (value) {
                     is NetworkResponse.Success -> {
                         value.data?.let {
                             quizList.clear()
                             quizList.addAll(it)
+                            binding.rvUserQuizzes.isVisible = true
                             userQuizAdapter.submitList(quizList)
                         }
                         stopShimmerLoading()
@@ -112,17 +115,18 @@ class ProfileFragment : Fragment(), QuizClickListener {
         homeShimmerEffect.startShimmer()
     }
 
+    @SuppressLint("StringFormatMatches")
     private fun updateView() = binding.apply {
         textUserName.text = userProfileBody.username
         textUserEmail.text = userProfileBody.userEmail
         textUserNumberOfQuiz.text = resources.getString(R.string.total_quiz, quizList.size)
         textEmptyData.isVisible = quizList.isEmpty()
+        rvUserQuizzes.isVisible = !quizList.isEmpty()
     }
 
     override fun quizClickListener(quizListBody: QuizResponse) {
         profileViewModel.deleteQuiz(quizListBody.quizId)
         quizList.remove(quizListBody)
-        userQuizAdapter.notifyDataSetChanged()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             profileViewModel.deleteQuizReponse.collectLatest { value: NetworkResponse<DeleteResponseBody> ->
                 when (value) {
