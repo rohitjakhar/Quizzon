@@ -91,9 +91,13 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
-## Contribute 🤝
+## Want to Contribute 🙋‍♂️?
 
-If you want to contribute to this library, you're always welcome!
+Awesome! If you want to contribute to this project, you're always welcome! See [Contributing Guidelines](CONTRIBUTING.md).
+
+## Want to discuss? 💬
+
+Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/RohitJakhar/NotyKT/discussions).
 
 ## Contact 📩
 
