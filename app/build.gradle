@@ -18,10 +18,11 @@ android {
         applicationId "com.rohit.quizzon"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 10
-        versionName "2.0.1"
+        versionCode 11
+        versionName "2.0.2"
         buildConfigField("String", "USERNAME", username)
         buildConfigField("String", "PASSWORD", password)
+        buildConfigField("String", "BASE_URL", base_url)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
