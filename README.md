@@ -29,13 +29,12 @@ Clone the repository on your machine. Open the project on your IDE and connect i
 
 ## 📸 Screenshots
 
-||||
-|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
-| ![](media/1.png) | ![](media/2.png) | ![](media/3.png) |
-| ![](media/4.png)  | ![](media/5.png) | ![](media/6.png)    |
-| ![](media/7.png) | ![](media/8.png)    | ![](media/9.png)      |
-|![](media/10.png)  |![](media/11.png)  |![](media/12.png)      |
-|![](media/13.png)  |![](media/14.png)  |![](media/15.png)      |
+|||||
+|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
+| ![](media/1.png) | ![](media/2.png) | ![](media/3.png) | ![](media/4.png)  |
+| ![](media/5.png) | ![](media/6.png)    | ![](media/7.png) | ![](media/8.png)  |
+|  ![](media/9.png)      | ![](media/10.png)  | ![](media/11.png)  |![](media/12.png)      |
+|  ![](media/13.png)  | ![](media/14.png)  |![](media/15.png)      |
 
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
@@ -106,7 +105,7 @@ Have an project? DM us at 👇<br>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-red.svg?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/rohitjakhar0/)
 
-
+---
 ## Donation 💰
 
 If this project help you reduce time to develop, you can give me a cup of coffee :)
