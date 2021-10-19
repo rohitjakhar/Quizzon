@@ -95,6 +95,8 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 Awesome! If you want to contribute to this project, you're always welcome! See [Contributing Guidelines](CONTRIBUTING.md).
 
+Maintain proper [Code of Conduct](CODE_OF_CONDUCT.md) for the whole contribution.
+
 ## Want to discuss? 💬
 
 Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/RohitJakhar/NotyKT/discussions).
@@ -114,3 +116,4 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 <a href="https://www.buymeacoffee.com/rohitjakhar" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 <br>
+
