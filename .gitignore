@@ -3,6 +3,15 @@
 /gradle.properties
 /local.properties
 /.idea/*
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/compiler.xml
+/.idea/gradle.xml
+/.idea/kotlinc.xml
+/.idea/misc.xml
 .DS_Store
 /build
 /captures
