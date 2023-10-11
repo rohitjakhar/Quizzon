@@ -11,13 +11,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdk 34
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.rohit.quizzon"
-        minSdkVersion 21
-        targetSdkVersion 32
+        minSdkVersion 24
+        targetSdkVersion 34
         versionCode 11
         versionName "2.0.2"
         buildConfigField("String", "USERNAME", username)
@@ -49,26 +49,26 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
 
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
+    }
+    kotlin {
+        jvmToolchain(11)
     }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.8.0-alpha01'
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version") {
-        because("Navigation Component")
-    }
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // Testing
     testImplementation 'junit:junit:4.13.2'
@@ -76,32 +76,18 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1") {
-        because("Coroutine library")
-    }
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
-    implementation('com.squareup.retrofit2:retrofit:2.9.0') {
-        because("Network calling")
-    }
-    implementation('com.squareup.retrofit2:converter-gson:2.9.0') {
-        because("Converter")
-    }
-    implementation('com.google.code.gson:gson:2.8.7') {
-        because("Gson Converter Class")
-    }
-    implementation('com.squareup.okhttp3:logging-interceptor:4.9.0') {
-        because("For Logging Interceptor")
-    }
+    implementation('com.squareup.retrofit2:retrofit:2.9.0')
+    implementation('com.squareup.retrofit2:converter-gson:2.9.0')
+    implementation('com.google.code.gson:gson:2.9.0')
+    implementation('com.squareup.okhttp3:logging-interceptor:4.9.0')
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:$hilt_version") {
-        because("DI using Hilt")
-    }
+    implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
-    implementation("androidx.datastore:datastore-preferences:1.0.0") {
-        because("Data Storeage")
-    }
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
@@ -113,18 +99,16 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
 
-    implementation platform('com.google.firebase:firebase-bom:28.1.0') {
-        because("Firebase BOM")
-    }
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-perf-ktx'
 
 
-    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
 
     implementation('com.github.hellosagar:ProgressButton:0.31')
     implementation "com.airbnb.android:lottie:4.1.0"

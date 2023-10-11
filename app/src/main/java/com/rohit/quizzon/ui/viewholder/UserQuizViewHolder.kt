@@ -21,7 +21,7 @@ class UserQuizViewHolder(
 
     fun bind(quizResponse: QuizResponse) = binding.apply {
         val context = binding.root.context
-        textQuestionIndex.text = absoluteAdapterPosition.plus(1).toString()
+        textQuestionIndex.text = adapterPosition.plus(1).toString()
         textQuizTitle.text = quizResponse.quizTitle
         imgDeleteItem.setOnClickListener {
             MaterialAlertDialogBuilder(binding.root.context)

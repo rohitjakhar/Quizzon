@@ -35,7 +35,7 @@ class QuestionAdapter(
 
         init {
             binding.imgDeleteItem.setOnClickListener {
-                onDelete(absoluteAdapterPosition)
+                onDelete(adapterPosition)
             }
         }
 
