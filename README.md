@@ -12,7 +12,6 @@
 
 ## Setup
 Clone the repository on your machine. Open the project on your IDE and connect it to firebase and harperDB and everything will be setup
-
 - Add your firebase json class in app directory
 - Add your Harperdb Credentital in build.property
 

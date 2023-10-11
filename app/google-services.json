@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1111",
+    "project_id": "project-111",
+    "storage_bucket": "project-1111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11111:android:1111",
+        "android_client_info": {
+          "package_name": "com.rohit.quizzon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1111-1111.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rohit.quizzon",
+            "certificate_hash": "1111"
+          }
+        },
+        {
+          "client_id": "1111-1111.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rohit.quizzon",
+            "certificate_hash": "1111"
+          }
+        },
+        {
+          "client_id": "1111-1111.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "1111"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1111-1111.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
